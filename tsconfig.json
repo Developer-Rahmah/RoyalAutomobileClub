@@ -1,0 +1,23 @@
+// {
+//   "extends": "expo/tsconfig.base",
+//   "compilerOptions": {
+//     "strict": true,
+//      "baseUrl": ".",
+//     "paths": {
+//       "RoyalAutomobileClub/*": ["*"]
+//     },
+//   }
+// }
+{
+  "extends": "expo/tsconfig.base",
+  "scripts": "true",
+  "typeRoots": ["./types", "./node_modules/@types"],
+
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "RoyalAutomobileClub/*": ["*"]
+    },
+    "lib": ["es5", "es6", "dom", "dom.iterable"]
+  }
+}
