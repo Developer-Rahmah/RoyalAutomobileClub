@@ -1,7 +1,9 @@
-import {Platform} from 'react-native';
+import * as Font from 'expo-font';
 
-export const InterRegularFont =
-  Platform.OS == 'ios' ? 'Inter-Light' : 'Inter-Light';
-export const InterMediumFont = 'Inter-Medium';
-export const InterBoldFont = Platform.OS == 'ios' ? 'Inter-Bold' : 'Inter-Bold';
-export const RubikMedium = 'Rubik-Medium';
+export const fetchFonts = () => {
+  return Font.loadAsync({
+    'Poppins-Bold': require('../fonts/Poppins-Bold.ttf'),
+    'Poppins-Regular': require('../fonts/Poppins-Regular.ttf'),
+    'Poppins-Medium': require('../fonts/Poppins-Medium.ttf'),
+  });
+};

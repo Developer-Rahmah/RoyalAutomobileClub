@@ -1,19 +1,113 @@
-import React from 'react'
-import Header from 'RoyalAutomobileClub/src/components/Header'
-import Container from 'RoyalAutomobileClub/src/components/Container'
-import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors'
-export default function WelcomeScreen () {
+import React from 'react';
+import Header from 'RoyalAutomobileClub/src/components/Header';
+import {MainContainer} from 'RoyalAutomobileClub/src/components/MainContainer';
+import Title from 'RoyalAutomobileClub/src/components/Title';
+import IconImage from 'RoyalAutomobileClub/IconImage';
+import Lang from 'RoyalAutomobileClub/assets/images/lang.png';
+import ARIcon from 'RoyalAutomobileClub/assets/icons/ar.png';
+import ENIcon from 'RoyalAutomobileClub/assets/icons/en.png';
+
+import ImageStyles from 'RoyalAutomobileClub/assets/styles/ImageStyles';
+import {
+  ChooseYourLanguageContainer,
+  ContainerView,
+  FlagAndLangContainer,
+  RadioBtnSelectLangContainer,
+  WelcomeContainer,
+  WelcomeOnBoardContainer,
+  RadioBtnContainer,
+  TopPadding,
+  LangImgContainer,
+} from './styled';
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
+import RadioButton from 'RoyalAutomobileClub/src/components/RadioButton';
+import {useState} from 'react';
+export default function WelcomeScreen() {
+  const [EN, setEN] = useState(false);
+  const [AR, setAR] = useState(false);
+  const onLanguagechange = (lang: string) => {
+    if (lang == 'ar') {
+      setAR(true);
+      setEN(false);
+    } else {
+      setEN(true);
+      setAR(false);
+    }
+  };
+
   return (
     <>
-      <Container>
+      <Header title="Welcome" />
+
+      <MainContainer>
         <>
-          <Header
-            greenHeader={false}
-            titleColor={Colors.BLACK}
-            title='Create New Product'
-          />
+          <ContainerView>
+            <WelcomeContainer>
+              <Title
+                title="Welcome"
+                fontFamily="Poppins-Medium"
+                large
+                color={Colors.BLACK}
+              />
+              <ChooseYourLanguageContainer>
+                <WelcomeOnBoardContainer>
+                  <Title
+                    title="Welcome onboard,"
+                    fontFamily="Poppins-Medium"
+                    color={Colors.ORANGE}
+                    small
+                  />
+                </WelcomeOnBoardContainer>
+                <Title
+                  title="Choose Your Language"
+                  fontFamily="Poppins-Medium"
+                  color={Colors.BLACK}
+                />
+              </ChooseYourLanguageContainer>
+            </WelcomeContainer>
+            <LangImgContainer>
+              <IconImage source={Lang} style={ImageStyles.mediumImage} />
+            </LangImgContainer>
+            {/* ENGLISH lang */}
+            <RadioBtnSelectLangContainer
+              onPress={() => onLanguagechange('en')}
+              isSelected={EN}>
+              <FlagAndLangContainer>
+                <IconImage source={ENIcon} />
+                <Title
+                  title="English"
+                  fontFamily="Poppins-Regular"
+                  medium
+                  color={EN ? Colors.ORANGE : Colors.SEMI_BLACK}
+                />
+              </FlagAndLangContainer>
+              <RadioBtnContainer>
+                <RadioButton isSelected={EN} />
+              </RadioBtnContainer>
+            </RadioBtnSelectLangContainer>
+
+            {/* ARABIC lang */}
+            <TopPadding>
+              <RadioBtnSelectLangContainer
+                onPress={() => onLanguagechange('ar')}
+                isSelected={AR}>
+                <FlagAndLangContainer>
+                  <IconImage source={ARIcon} />
+                  <Title
+                    title="Arabic"
+                    fontFamily="Poppins-Regular"
+                    medium
+                    color={AR ? Colors.ORANGE : Colors.SEMI_BLACK}
+                  />
+                </FlagAndLangContainer>
+                <RadioBtnContainer>
+                  <RadioButton isSelected={AR} />
+                </RadioBtnContainer>
+              </RadioBtnSelectLangContainer>
+            </TopPadding>
+          </ContainerView>
         </>
-      </Container>
+      </MainContainer>
     </>
-  )
+  );
 }

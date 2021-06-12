@@ -3,6 +3,7 @@
  * @param {*} uri
  * @param {*} query
  */
+
 export const buildUrl = (uri: string, query: object = {}, params = []) => {
   let queryString = '';
   let paramString = '';

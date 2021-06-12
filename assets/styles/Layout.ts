@@ -1,6 +1,7 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
-//  const Layout = () => {
+const HEIGHT = Dimensions.get('window').height;
+const WIDTH = Dimensions.get('window').width;
 
 const Layout = StyleSheet.create({
   card: {
@@ -55,14 +56,13 @@ const Layout = StyleSheet.create({
   },
 
   header: {
-    top: 0,
-    left: 0,
     width: '100%',
-    height: Dimensions.get('window').height / 9,
-    padding: 15,
-    backgroundColor: Colors.DARK_BLUE,
+    height: Dimensions.get('window').height / 8,
     alignItems: 'center',
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: WIDTH / 37,
+    paddingTop: WIDTH / 10,
   },
 
   flexDirectionRow: {

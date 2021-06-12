@@ -1,29 +1,49 @@
 import React from 'react';
-import {View} from 'react-native';
+import {ImageBackground} from 'react-native';
 import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import Layout from 'RoyalAutomobileClub/assets/styles/Layout';
-import Title from './Title';
-
+import Title from 'RoyalAutomobileClub/src/components/Title';
+import HeaderImg from 'RoyalAutomobileClub/assets/images/header.png';
+import IconImage from 'RoyalAutomobileClub/IconImage';
+import BackIcon from 'RoyalAutomobileClub/assets/icons/left-arrow.png';
+import Menu from 'RoyalAutomobileClub/assets/icons/menu.png';
+import Bell from 'RoyalAutomobileClub/assets/icons/bell.png';
+import ImageStyles from 'RoyalAutomobileClub/assets/styles/ImageStyles';
 const Header = ({
   titleColor,
-  greenHeader = true,
   title = 'Items',
+  showBack = false,
+  showMenu = false,
+  showBell = false,
 }: {
   titleColor?: Colors;
-  greenHeader?: boolean;
   title?: string;
+  showBack?: boolean;
+  showMenu?: boolean;
+  showBell?: boolean;
 }) => {
   return (
-    <View style={[greenHeader ? Layout.header : null]}>
+    <ImageBackground source={HeaderImg} style={[Layout.header]}>
+      {/* back icon */}
+      <IconImage
+        source={showBack ? BackIcon : showMenu ? Menu : null}
+        color={Colors.WHITE}
+        small
+      />
       {/* screen title */}
-      <View style={Layout.cardPadding}>
-        <Title
-          title={title}
-          bold
-          color={titleColor ? titleColor : Colors.WHITE}
-        />
-      </View>
-    </View>
+      <Title
+        title={title}
+        medium
+        fontFamily="Poppins-Medium"
+        color={titleColor ? titleColor : Colors.WHITE}
+      />
+      {/* notifications icon */}
+      <IconImage
+        source={showBell ? Bell : null}
+        color={Colors.WHITE}
+        style={ImageStyles.iconHeight}
+      />
+    </ImageBackground>
   );
 };
 

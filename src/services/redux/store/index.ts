@@ -1,4 +1,4 @@
-import applicationReducer from 'RoyalAutomobileClub/services/redux/reducer';
+import applicationReducer from 'RoyalAutomobileClub/src/services/redux/reducer';
 
 const {createStore} = require('redux');
 

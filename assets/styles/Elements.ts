@@ -1,14 +1,28 @@
 import {Dimensions, I18nManager, StyleSheet} from 'react-native';
 import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
-import {InterRegularFont} from 'RoyalAutomobileClub/assets/styles/Fonts';
-const height = Dimensions.get('window').height;
+import {SCREEN_HEIGHT} from 'RoyalAutomobileClub/src/services/helper/Constant';
 
 const Elements = StyleSheet.create({
   title: {
-    fontFamily: InterRegularFont,
-    fontSize: 20,
+    fontFamily: 'Poppins-Regular',
+    fontSize: SCREEN_HEIGHT / 35,
     textAlign: 'center',
-    lineHeight: Dimensions.get('window').width / 30,
+    // lineHeight: Dimensions.get('window').width / 20,
+  },
+  unselectedRadio: {
+    borderRadius: SCREEN_HEIGHT / 45,
+    width: SCREEN_HEIGHT / 36,
+    height: SCREEN_HEIGHT / 36,
+    backgroundColor: Colors.LIGHT_GRAY_2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 5,
+  },
+  selectedRadio: {
+    backgroundColor: Colors.ORANGE,
+    borderRadius: 50,
+    width: '100%',
+    height: '100%',
   },
   borderHorizontalSeparator: {
     height: 1,
@@ -21,7 +35,7 @@ const Elements = StyleSheet.create({
   },
   summary: {
     color: Colors.LIGHT_GRAY,
-    fontFamily: InterRegularFont,
+    fontFamily: 'Poppins-Regular',
     fontSize: 15,
     textAlign: 'left',
   },
@@ -44,7 +58,7 @@ const Elements = StyleSheet.create({
   },
   input: {
     color: Colors.BLACK,
-    fontFamily: InterRegularFont,
+    fontFamily: 'Poppins-Regular',
     textAlign: I18nManager.isRTL ? 'right' : 'left',
   },
 
@@ -128,7 +142,7 @@ const Elements = StyleSheet.create({
     height: '100%',
   },
   receiptsContainer: {
-    height: height / 1.167,
+    height: SCREEN_HEIGHT / 1.167,
     justifyContent: 'space-between',
   },
   searchOnReceiptsContainer: {

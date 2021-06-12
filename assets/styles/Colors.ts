@@ -1,10 +1,12 @@
 export enum Colors {
-  BLACK = '#333333',
+  BLACK = '#161615',
+  SEMI_BLACK = '#555555',
+  ORANGE = '#CA8008',
   GREEN = '#2bd67b',
   LIGHT_YELLOW = '#effad3',
   BEIGE = '#a1a7c4',
   GRAY = '#7E7B7B',
-  LIGHT_GRAY = '#5a607f',
+  LIGHT_GRAY = '#E4E4E4',
   LIGHT_BLUE = '#98ddca',
   LIGHT_GREEN = '#d5ecc2',
   WHITE = '#FFFFFF',
@@ -15,6 +17,6 @@ export enum Colors {
   LIGHT_BEIGE = '#d9e1ec',
   DARK_BLUE = 'rgb(28,32,60)',
   DARK_GRAY_2 = '#7e84a3',
-  LIGHT_GRAY_2 = '#d7dbec',
+  LIGHT_GRAY_2 = '#CBCBCB',
   LIGHT_GRAY_3 = '#e6e9f4',
 }

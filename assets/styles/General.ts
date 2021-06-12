@@ -97,7 +97,7 @@ const General = StyleSheet.create({
     width: '70%',
   },
 
-  largePadding: {
+  smallPadding: {
     paddingVertical: Dimensions.get('window').width / 27,
     paddingHorizontal: Dimensions.get('window').width / 37,
   },
