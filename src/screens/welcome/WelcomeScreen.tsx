@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from 'RoyalAutomobileClub/src/components/Header';
 import {MainContainer} from 'RoyalAutomobileClub/src/components/MainContainer';
 import Title from 'RoyalAutomobileClub/src/components/Title';
@@ -22,10 +22,19 @@ import {
 import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import RadioButton from 'RoyalAutomobileClub/src/components/RadioButton';
 import {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {setLanguageAction} from 'RoyalAutomobileClub/src/services/redux/actions';
+import LocalStorage from 'RoyalAutomobileClub/src/services/helper/LocalStorage';
+import {I18nManager} from 'react-native';
+import * as Updates from 'expo-updates';
+
 export default function WelcomeScreen() {
-  const [EN, setEN] = useState(false);
-  const [AR, setAR] = useState(false);
-  const onLanguagechange = (lang: string) => {
+  let lang = useSelector((state) => state.langCode);
+
+  const [EN, setEN] = useState(lang == 'en');
+  const [AR, setAR] = useState(lang == 'ar');
+  const getLang = async () => {
+    lang = await LocalStorage.get('lang');
     if (lang == 'ar') {
       setAR(true);
       setEN(false);
@@ -34,11 +43,30 @@ export default function WelcomeScreen() {
       setAR(false);
     }
   };
-
+  const dispatch = useDispatch();
+  const onLanguagechange = (lang: string) => {
+    if (lang == 'ar') {
+      setAR(true);
+      setEN(false);
+      dispatch(setLanguageAction('ar'));
+      LocalStorage.set('lang', 'ar');
+      I18nManager.forceRTL(true);
+      Updates.reloadAsync();
+    } else {
+      setEN(true);
+      setAR(false);
+      dispatch(setLanguageAction('en'));
+      LocalStorage.set('lang', 'en');
+      I18nManager.forceRTL(false);
+      Updates.reloadAsync();
+    }
+  };
+  useEffect(() => {
+    getLang();
+  }, [lang]);
   return (
     <>
       <Header title="Welcome" />
-
       <MainContainer>
         <>
           <ContainerView>

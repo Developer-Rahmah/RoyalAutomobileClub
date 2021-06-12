@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, ImageSourcePropType, View} from 'react-native';
+import {Dimensions, Image, ImageSourcePropType} from 'react-native';
 import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
 

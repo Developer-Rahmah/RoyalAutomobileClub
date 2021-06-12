@@ -14,6 +14,9 @@ export interface IButtonProps {
 export const ContainerView = styled.View`
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 5%;
 `;
 export const WelcomeContainer = styled.View`
   width: 100%;
