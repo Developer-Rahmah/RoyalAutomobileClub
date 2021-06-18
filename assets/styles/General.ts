@@ -1,5 +1,5 @@
-import {StyleSheet, Dimensions} from 'react-native'
-import {Colors} from './Colors'
+import {StyleSheet, Dimensions} from 'react-native';
+import {Colors} from './Colors';
 
 const General = StyleSheet.create({
   fullScreen: {
@@ -107,5 +107,5 @@ const General = StyleSheet.create({
   largeMarginVertical: {
     marginVertical: 30,
   },
-})
-export default General
+});
+export default General;

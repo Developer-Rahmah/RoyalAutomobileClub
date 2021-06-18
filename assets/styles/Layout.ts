@@ -1,6 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
-const HEIGHT = Dimensions.get('window').height;
 const WIDTH = Dimensions.get('window').width;
 
 const Layout = StyleSheet.create({

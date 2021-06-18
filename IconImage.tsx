@@ -1,9 +1,9 @@
 import React from 'react';
-import { I18nManager } from 'react-native';
-import { Dimensions, Image, ImageSourcePropType } from 'react-native';
-import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
+import {I18nManager} from 'react-native';
+import {Image, ImageSourcePropType} from 'react-native';
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
-import { SCREEN_WIDTH } from './src/services/helper/Constant';
+import {SCREEN_WIDTH} from './src/services/helper/Constant';
 
 export default function IconImage({
   source,
@@ -16,7 +16,6 @@ export default function IconImage({
   small?: boolean;
   style?: {};
 }) {
-
   return (
     <Image
       resizeMode="contain"
@@ -24,11 +23,14 @@ export default function IconImage({
       style={[
         small
           ? {
-            width: SCREEN_WIDTH / 17,
-            height: SCREEN_WIDTH / 17,
-          }
+              width: SCREEN_WIDTH / 17,
+              height: SCREEN_WIDTH / 17,
+            }
           : Elements.icon,
-        { tintColor: color, transform: [{ rotateY: I18nManager.isRTL ? '180deg' : '0deg' }] },
+        {
+          tintColor: color,
+          transform: [{rotateY: I18nManager.isRTL ? '180deg' : '0deg'}],
+        },
         style,
       ]}
     />

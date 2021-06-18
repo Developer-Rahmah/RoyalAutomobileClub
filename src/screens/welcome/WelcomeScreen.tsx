@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import Header from 'RoyalAutomobileClub/src/components/Header';
-import { MainContainer } from 'RoyalAutomobileClub/src/components/MainContainer';
+import {MainContainer} from 'RoyalAutomobileClub/src/components/MainContainer';
 import Title from 'RoyalAutomobileClub/src/components/Title';
 import IconImage from 'RoyalAutomobileClub/IconImage';
 import Lang from 'RoyalAutomobileClub/assets/images/lang.png';
@@ -19,27 +19,26 @@ import {
   TopPadding,
   LangImgContainer,
 } from './styled';
-import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import RadioButton from 'RoyalAutomobileClub/src/components/RadioButton';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setLanguageAction } from 'RoyalAutomobileClub/src/services/redux/actions';
+import {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {setLanguageAction} from 'RoyalAutomobileClub/src/services/redux/actions';
 import LocalStorage from 'RoyalAutomobileClub/src/services/helper/LocalStorage';
-import { I18nManager } from 'react-native';
+import {I18nManager} from 'react-native';
 import * as Updates from 'expo-updates';
 
 export default function WelcomeScreen() {
-
   interface RootState {
-    langCode: string
+    langCode: string;
   }
-  const selectLangCode = (state: RootState) => state.langCode
-  let lang = useSelector(selectLangCode)
-  const [EN, setEN] = useState(lang == 'en');
-  const [AR, setAR] = useState(lang == 'ar');
+  const selectLangCode = (state: RootState) => state.langCode;
+  let selectedLang = useSelector(selectLangCode);
+  const [EN, setEN] = useState(selectedLang == 'en');
+  const [AR, setAR] = useState(selectedLang == 'ar');
   const getLang = async () => {
-    lang = await LocalStorage.get('lang');
-    if (lang == 'ar') {
+    selectedLang = await LocalStorage.get('lang');
+    if (selectedLang == 'ar') {
       setAR(true);
       setEN(false);
     } else {
@@ -67,7 +66,7 @@ export default function WelcomeScreen() {
   };
   useEffect(() => {
     getLang();
-  }, [lang]);
+  }, [selectedLang]);
   return (
     <>
       <Header title="Welcome" />

@@ -1,9 +1,9 @@
-import {Dimensions, I18nManager, StyleSheet} from 'react-native'
-import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors'
+import {Dimensions, I18nManager, StyleSheet} from 'react-native';
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import {
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
-} from 'RoyalAutomobileClub/src/services/helper/Constant'
+} from 'RoyalAutomobileClub/src/services/helper/Constant';
 
 const Elements = StyleSheet.create({
   title: {
@@ -163,5 +163,5 @@ const Elements = StyleSheet.create({
   EmptyReceiptsContainer: {
     width: '67%',
   },
-})
-export default Elements
+});
+export default Elements;

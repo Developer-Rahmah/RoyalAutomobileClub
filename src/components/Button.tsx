@@ -1,11 +1,9 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
-import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
+import {TouchableOpacity} from 'react-native';
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import Layout from 'RoyalAutomobileClub/assets/styles/Layout';
 import General from 'RoyalAutomobileClub/assets/styles/General';
 import Title from './Title';
-import { SCREEN_WIDTH } from '../services/helper/Constant';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
 
 export default function Button(props: {
@@ -29,12 +27,10 @@ export default function Button(props: {
       onPress={handlePress}
       disabled={props.locked}
       style={[
-
-        Layout.flexCenter, Elements.primaryButton, General.largeMarginVertical
-
-
-      ]}
-    >
+        Layout.flexCenter,
+        Elements.primaryButton,
+        General.largeMarginVertical,
+      ]}>
       <Title title={props.title} color={props.txtColor} />
     </TouchableOpacity>
   );

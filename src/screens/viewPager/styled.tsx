@@ -1,4 +1,4 @@
-import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import {
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
@@ -47,9 +47,9 @@ export const BtnIndicatorAndSkipContainer = styled.View`
 
 export const GrayIndicator = styled.View`
   background-color: ${Colors.LIGHT_GRAY};
-  width: ${SCREEN_WIDTH / 3};
-  margin-vertical: 20;
-  border-radius: 5;
+  width: ${SCREEN_WIDTH / 3}px;
+  margin-vertical: 20px;
+  border-radius: 5px;
 `;
 export const OrangeIndicator = styled.View<IOrangeIndicatorProps>`
   width: ${(props) => props.width};
@@ -58,4 +58,7 @@ export const OrangeIndicator = styled.View<IOrangeIndicatorProps>`
   border-radius: 10px;
 `;
 export const SkipContainer = styled.View`
-justify-content: center; align-items: center; flex-direction: row`;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+`;

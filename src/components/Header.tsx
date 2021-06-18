@@ -1,6 +1,6 @@
 import React from 'react';
-import { ImageBackground, TouchableOpacity } from 'react-native';
-import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
+import {ImageBackground, TouchableOpacity} from 'react-native';
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import Layout from 'RoyalAutomobileClub/assets/styles/Layout';
 import Title from 'RoyalAutomobileClub/src/components/Title';
 import HeaderImg from 'RoyalAutomobileClub/assets/images/header.png';
@@ -9,7 +9,7 @@ import BackIcon from 'RoyalAutomobileClub/assets/icons/left-arrow.png';
 import Menu from 'RoyalAutomobileClub/assets/icons/menu.png';
 import Bell from 'RoyalAutomobileClub/assets/icons/bell.png';
 import ImageStyles from 'RoyalAutomobileClub/assets/styles/ImageStyles';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 const Header = ({
   titleColor,
   title = 'Items',
@@ -23,9 +23,8 @@ const Header = ({
   showMenu?: boolean;
   showBell?: boolean;
 }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   return (
-
     <ImageBackground source={HeaderImg} style={[Layout.header]}>
       {/* back icon */}
 
