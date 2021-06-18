@@ -1,6 +1,6 @@
-import {Dimensions} from 'react-native';
-import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
-import {SCREEN_HEIGHT} from 'RoyalAutomobileClub/src/services/helper/Constant';
+import { Dimensions } from 'react-native';
+import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
+import { SCREEN_HEIGHT } from 'RoyalAutomobileClub/src/services/helper/Constant';
 import styled from 'styled-components/native';
 
 export interface ILangProps {
@@ -64,7 +64,9 @@ export const TopPadding = styled.View`
 export const LangImgContainer = styled.View`
   padding-bottom: 17%;
 `;
-export const SelectLangBtn: React.FC<IButtonProps> = (props) => {
+
+
+export const Skip: React.FC<IButtonProps> = (props) => {
   return (
     <>
       <RadioBtnSelectLangContainer

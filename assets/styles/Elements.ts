@@ -1,6 +1,9 @@
-import {Dimensions, I18nManager, StyleSheet} from 'react-native';
-import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
-import {SCREEN_HEIGHT} from 'RoyalAutomobileClub/src/services/helper/Constant';
+import {Dimensions, I18nManager, StyleSheet} from 'react-native'
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors'
+import {
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+} from 'RoyalAutomobileClub/src/services/helper/Constant'
 
 const Elements = StyleSheet.create({
   title: {
@@ -43,6 +46,15 @@ const Elements = StyleSheet.create({
     width: '80%',
     backgroundColor: Colors.DARK_BLUE,
   },
+  primaryButton: {
+    paddingVertical: 13,
+    width: SCREEN_WIDTH / 1.2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    backgroundColor: Colors.ORANGE,
+  },
+
   searchInputContainer: {
     height: '10%',
     padding: 30,
@@ -151,5 +163,5 @@ const Elements = StyleSheet.create({
   EmptyReceiptsContainer: {
     width: '67%',
   },
-});
-export default Elements;
+})
+export default Elements

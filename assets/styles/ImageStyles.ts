@@ -1,5 +1,6 @@
-import {StyleSheet, Dimensions} from 'react-native';
-const WIDTH = Dimensions.get('window').width;
+import {StyleSheet, Dimensions} from 'react-native'
+import {SCREEN_WIDTH} from 'RoyalAutomobileClub/src/services/helper/Constant'
+const WIDTH = Dimensions.get('window').width
 
 const ImageStyles = StyleSheet.create({
   teaserImage: {
@@ -12,8 +13,8 @@ const ImageStyles = StyleSheet.create({
     resizeMode: 'contain',
   },
   mediumImage: {
-    width: WIDTH / 2.7,
-    height: WIDTH / 2.7,
+    width: WIDTH / 1.2,
+    height: WIDTH / 1.2,
     resizeMode: 'contain',
   },
   posterImage: {
@@ -32,5 +33,15 @@ const ImageStyles = StyleSheet.create({
     width: WIDTH / 15,
     height: WIDTH / 15,
   },
-});
-export default ImageStyles;
+  selectLangImg: {
+    width: WIDTH / 2.2,
+    height: WIDTH / 2.2,
+    resizeMode: 'contain',
+  },
+  backIcon: {
+    width: SCREEN_WIDTH / 11,
+    height: SCREEN_WIDTH / 17,
+    resizeMode: 'contain',
+  },
+})
+export default ImageStyles

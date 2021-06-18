@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import Header from 'RoyalAutomobileClub/src/components/Header';
-import {MainContainer} from 'RoyalAutomobileClub/src/components/MainContainer';
+import { MainContainer } from 'RoyalAutomobileClub/src/components/MainContainer';
 import Title from 'RoyalAutomobileClub/src/components/Title';
 import IconImage from 'RoyalAutomobileClub/IconImage';
 import Lang from 'RoyalAutomobileClub/assets/images/lang.png';
@@ -19,18 +19,22 @@ import {
   TopPadding,
   LangImgContainer,
 } from './styled';
-import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
+import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
 import RadioButton from 'RoyalAutomobileClub/src/components/RadioButton';
-import {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {setLanguageAction} from 'RoyalAutomobileClub/src/services/redux/actions';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLanguageAction } from 'RoyalAutomobileClub/src/services/redux/actions';
 import LocalStorage from 'RoyalAutomobileClub/src/services/helper/LocalStorage';
-import {I18nManager} from 'react-native';
+import { I18nManager } from 'react-native';
 import * as Updates from 'expo-updates';
 
 export default function WelcomeScreen() {
-  let lang = useSelector((state) => state.langCode);
 
+  interface RootState {
+    langCode: string
+  }
+  const selectLangCode = (state: RootState) => state.langCode
+  let lang = useSelector(selectLangCode)
   const [EN, setEN] = useState(lang == 'en');
   const [AR, setAR] = useState(lang == 'ar');
   const getLang = async () => {
@@ -94,7 +98,7 @@ export default function WelcomeScreen() {
               </ChooseYourLanguageContainer>
             </WelcomeContainer>
             <LangImgContainer>
-              <IconImage source={Lang} style={ImageStyles.mediumImage} />
+              <IconImage source={Lang} style={ImageStyles.selectLangImg} />
             </LangImgContainer>
             {/* ENGLISH lang */}
             <RadioBtnSelectLangContainer
