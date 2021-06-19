@@ -1,6 +1,6 @@
-import {StyleSheet, Dimensions} from 'react-native';
-import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
-const WIDTH = Dimensions.get('window').width;
+import {StyleSheet, Dimensions} from 'react-native'
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors'
+const WIDTH = Dimensions.get('window').width
 
 const Layout = StyleSheet.create({
   card: {
@@ -10,7 +10,12 @@ const Layout = StyleSheet.create({
   radius: {
     borderRadius: 5,
   },
-
+  largeHorizontalMargin: {
+    marginHorizontal: 20,
+  },
+  smallMarginMinus: {
+    marginTop: -7,
+  },
   flexCenter: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -98,6 +103,6 @@ const Layout = StyleSheet.create({
   largeHorizontalPadding: {
     paddingHorizontal: Dimensions.get('window').width / 15,
   },
-});
+})
 
-export default Layout;
+export default Layout

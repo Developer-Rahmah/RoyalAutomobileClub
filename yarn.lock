@@ -2088,6 +2088,14 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
+"@types/rn-material-ui-textfield@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/rn-material-ui-textfield/-/rn-material-ui-textfield-1.0.1.tgz#358a0981a908c493c898931b882226fc2b731263"
+  integrity sha512-s1H7VbXuj4+ObOUHOazpmOs3jjEW+1I7d+oE58LEhVY1EEC6nw4ENlW6Wtl32vaERvvRmkGbGX/13Mk5yIfT7g==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
 "@types/scheduler@*":
   version "0.16.1"
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.1.tgz#18845205e86ff0038517aab7a18a62a6b9f71275"
@@ -6703,7 +6711,7 @@ promise@^8.0.3:
   dependencies:
     asap "~2.0.6"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -7182,6 +7190,13 @@ rimraf@~2.2.6:
   version "2.2.8"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
+
+rn-material-ui-textfield@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/rn-material-ui-textfield/-/rn-material-ui-textfield-1.0.4.tgz#12733efc89edec668f5bb2ff4bae7164eac9a746"
+  integrity sha512-SYdOZSZJbBsr+Ae1F8ItFPfg/Rgub7LHbH1fe1jmnLx6wVSl1RWb1cKuIDecOyVtWzDeCYFuFV+DBCzTib0khA==
+  dependencies:
+    prop-types "^15.5.9"
 
 rsvp@^4.8.4:
   version "4.8.5"

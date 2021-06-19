@@ -1,9 +1,9 @@
-import {Dimensions, I18nManager, StyleSheet} from 'react-native';
-import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
+import {Dimensions, I18nManager, StyleSheet} from 'react-native'
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors'
 import {
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
-} from 'RoyalAutomobileClub/src/services/helper/Constant';
+} from 'RoyalAutomobileClub/src/services/helper/Constant'
 
 const Elements = StyleSheet.create({
   title: {
@@ -62,17 +62,14 @@ const Elements = StyleSheet.create({
     borderBottomWidth: 1,
   },
   inputContainer: {
-    flex: 0.27,
+    paddingHorizontal: 10,
+    marginVertical: 10,
+    borderRadius: 5,
+    margin: 0,
     width: '100%',
+    justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderRadius: 5,
-    borderColor: Colors.ORANGE,
-    marginVertical: 10,
-    flexDirection: 'row',
-    padding: 5,
-    paddingHorizontal: 15,
-    justifyContent: 'flex-start',
   },
   helpBtn: {
     paddingVertical: Dimensions.get('window').width / 240,
@@ -180,10 +177,10 @@ const Elements = StyleSheet.create({
     justifyContent: 'center',
   },
   btnContainer: {
-    flex: 0.5,
+    flex: 0.4,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-});
-export default Elements;
+})
+export default Elements

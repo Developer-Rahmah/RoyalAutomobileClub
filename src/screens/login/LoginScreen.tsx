@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Header from 'RoyalAutomobileClub/src/components/Header';
 import Title from 'RoyalAutomobileClub/src/components/Title';
 import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
@@ -6,48 +6,116 @@ import LoginImg from 'RoyalAutomobileClub/assets/images/login.png';
 import Lock from 'RoyalAutomobileClub/assets/icons/lock.png';
 import User from 'RoyalAutomobileClub/assets/icons/user.png';
 import ImageStyles from 'RoyalAutomobileClub/assets/styles/ImageStyles';
-import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
-import {ContainerView, ImageAndTextContainer, ImageContainer} from './styled';
+import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
+import { ContainerView, ImageAndTextContainer, ImageContainer } from './styled';
 import General from 'RoyalAutomobileClub/assets/styles/General';
 import Button from 'RoyalAutomobileClub/src/components/Button';
-import {useNavigation} from '@react-navigation/native';
-import {View} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import { ScrollView, View } from 'react-native';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
+import { useSelector } from 'react-redux';
+import { useForm, Controller } from 'react-hook-form';
+import Input from 'RoyalAutomobileClub/src/components/Input';
+import { Toast } from 'native-base';
+import ErrorMsg from 'RoyalAutomobileClub/src/components/ErrorMsg';
+import { validateEmail } from 'RoyalAutomobileClub/src/services/helper/validation';
+import { useTranslation } from 'RoyalAutomobileClub/src/services/hooks';
 
 export default function LoginScreen() {
-  const navigation = useNavigation();
+
+  const t = useTranslation()
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValid }
+  } = useForm({
+    mode: 'onChange'
+  })
+  const onSubmit = (data: object) => {
+    Toast.show({
+      text: t('Welcome back'),
+      textStyle: {
+        color: Colors.WHITE,
+        fontSize: 20,
+        fontFamily: "Poppins-Medium",
+        textAlign: 'center'
+      },
+      style: { backgroundColor: Colors.SUCCESS, },
+
+      duration: 2000,
+      position: 'bottom',
+      onClose: reason => { },
+    })
+
+  }
   return (
     <>
       <Header title="Onboard" />
-      <ContainerView>
-        <ImageAndTextContainer>
-          <ImageContainer>
-            <IconImage source={LoginImg} style={ImageStyles.mediumImage} />
-          </ImageContainer>
-        </ImageAndTextContainer>
-        <View style={Elements.loginFieldsContainer}>
-          <Title title="Welcome back ," color={Colors.ORANGE} />
-          <View style={Elements.inputContainer}>
-            <IconImage source={User} style={General.smallEndMargin} small />
-            <TextInput placeholder="Email" />
+      <ScrollView>
+
+        <ContainerView>
+          <ImageAndTextContainer >
+            <ImageContainer style={{ flex: 0 }}>
+              <IconImage source={LoginImg} style={ImageStyles.mediumImage} />
+            </ImageContainer>
+          </ImageAndTextContainer>
+          <View style={Elements.loginFieldsContainer}>
+            <Title title="Welcome back ," color={Colors.ORANGE} />
+
+            <Controller
+              control={control}
+              render={({ field: { onChange, value, onBlur } }) => (
+                <Input
+                  placeholder={t("Email")}
+                  leftIcon={User}
+                  onChangeText={(value: string) => onChange(value)}
+                  value={value}
+                />
+              )}
+              name='email'
+              rules={{
+                required: true,
+                pattern: {
+                  value: validateEmail,
+                },
+              }}
+            />
+            {errors.email && <ErrorMsg errorMsg='Invalid Email Address.' />}
+
+            <Controller
+              control={control}
+              render={({ field: { onChange, value, onBlur } }) => (
+                <Input
+                  isPassword
+                  leftIcon={Lock}
+                  placeholder={t('Password')}
+                  onChangeText={(value: string) => onChange(value)}
+                  value={value}
+                />
+              )}
+              name='password'
+              rules={{ required: true }}
+            />
+            {errors.password && <ErrorMsg errorMsg='This is required.' />}
+
+            <Title
+              title="Forget Password?"
+              style={General.smallTopMargin}
+              color={Colors.ORANGE}
+            />
           </View>
-          <View style={Elements.inputContainer}>
-            <IconImage source={Lock} style={General.smallEndMargin} small />
-            <TextInput placeholder="Password" />
+          <View style={Elements.btnContainer}>
+            <Button
+              locked={
+                !isValid
+
+              }
+              onClick={handleSubmit(onSubmit)} title="Login" txtColor={Colors.WHITE} />
+            <Title title="Create an account" color={Colors.ORANGE} />
           </View>
 
-          <Title
-            title="Forget Password?"
-            style={General.smallTopMargin}
-            color={Colors.ORANGE}
-          />
-        </View>
-        <View style={Elements.btnContainer}>
-          <Button title="Login" txtColor={Colors.WHITE} />
-          <Title title="Create an account" color={Colors.ORANGE} />
-        </View>
-      </ContainerView>
+        </ContainerView>
+      </ScrollView>
     </>
   );
 }

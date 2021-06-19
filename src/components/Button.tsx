@@ -1,6 +1,6 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
-import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
+import { TouchableOpacity } from 'react-native';
+import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
 import Layout from 'RoyalAutomobileClub/assets/styles/Layout';
 import General from 'RoyalAutomobileClub/assets/styles/General';
 import Title from './Title';
@@ -29,7 +29,7 @@ export default function Button(props: {
       style={[
         Layout.flexCenter,
         Elements.primaryButton,
-        General.largeMarginVertical,
+        General.largeMarginVertical, { opacity: props.locked ? 0.3 : 1, }
       ]}>
       <Title title={props.title} color={props.txtColor} />
     </TouchableOpacity>
