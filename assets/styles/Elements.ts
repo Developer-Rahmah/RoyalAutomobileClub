@@ -62,7 +62,17 @@ const Elements = StyleSheet.create({
     borderBottomWidth: 1,
   },
   inputContainer: {
-    width: '90%',
+    flex: 0.27,
+    width: '100%',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: Colors.ORANGE,
+    marginVertical: 10,
+    flexDirection: 'row',
+    padding: 5,
+    paddingHorizontal: 15,
+    justifyContent: 'flex-start',
   },
   helpBtn: {
     paddingVertical: Dimensions.get('window').width / 240,
@@ -162,6 +172,18 @@ const Elements = StyleSheet.create({
   },
   EmptyReceiptsContainer: {
     width: '67%',
+  },
+  loginFieldsContainer: {
+    flex: 0.5,
+    width: '100%',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  btnContainer: {
+    flex: 0.5,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
 });
 export default Elements;

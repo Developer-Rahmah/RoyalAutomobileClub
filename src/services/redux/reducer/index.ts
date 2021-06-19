@@ -1,6 +1,7 @@
 const DEFAULT_STATE = {
   showGifImage: 'yes' as string,
   langCode: null,
+  password: null,
 };
 
 const applicationReducer = (state = DEFAULT_STATE, action) => {
@@ -15,7 +16,11 @@ const applicationReducer = (state = DEFAULT_STATE, action) => {
         ...state,
         showGifImage: action.payload,
       };
-
+    case 'SET_PASSWORD':
+      return {
+        ...state,
+        password: action.payload,
+      };
     default:
       return state;
   }

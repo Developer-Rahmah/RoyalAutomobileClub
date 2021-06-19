@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, {useEffect} from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
 import WelcomeScreen from 'RoyalAutomobileClub/src/screens/welcome/WelcomeScreen';
-import { useDispatch, useSelector } from 'react-redux';
-import { setLanguageAction } from '../services/redux/actions';
+import {useDispatch, useSelector} from 'react-redux';
+import {setLanguageAction} from '../services/redux/actions';
 import LocalStorage from '../services/helper/LocalStorage';
-import { I18nManager } from 'react-native';
+import {I18nManager} from 'react-native';
 import ViewPagerDiscover from '../screens/viewPager/ViewPagerDiscover';
 import ViewPagerOffer from '../screens/viewPager/ViewPagerOffer';
 import ViewPagerJoinUs from '../screens/viewPager/ViewPagerJoinUs';
@@ -48,8 +48,6 @@ const AppNavigator = () => {
             />
             <Stack.Screen name="ViewPagerOffer" component={ViewPagerOffer} />
             <Stack.Screen name="ViewPagerJoinUs" component={ViewPagerJoinUs} />
-
-
           </>
         )}
       </Stack.Navigator>

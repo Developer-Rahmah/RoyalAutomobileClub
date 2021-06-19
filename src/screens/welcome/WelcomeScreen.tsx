@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Header from 'RoyalAutomobileClub/src/components/Header';
 import {MainContainer} from 'RoyalAutomobileClub/src/components/MainContainer';
 import Title from 'RoyalAutomobileClub/src/components/Title';
-import IconImage from 'RoyalAutomobileClub/IconImage';
+import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
 import Lang from 'RoyalAutomobileClub/assets/images/lang.png';
 import ARIcon from 'RoyalAutomobileClub/assets/icons/ar.png';
 import ENIcon from 'RoyalAutomobileClub/assets/icons/en.png';

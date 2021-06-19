@@ -16,7 +16,7 @@ const General = StyleSheet.create({
     backgroundColor: Colors.VERY_LIGHT_GRAY,
   },
   smallEndMargin: {
-    marginEnd: 7,
+    marginEnd: 10,
   },
 
   greenBackground: {

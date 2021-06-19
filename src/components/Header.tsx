@@ -4,7 +4,7 @@ import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import Layout from 'RoyalAutomobileClub/assets/styles/Layout';
 import Title from 'RoyalAutomobileClub/src/components/Title';
 import HeaderImg from 'RoyalAutomobileClub/assets/images/header.png';
-import IconImage from 'RoyalAutomobileClub/IconImage';
+import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
 import BackIcon from 'RoyalAutomobileClub/assets/icons/left-arrow.png';
 import Menu from 'RoyalAutomobileClub/assets/icons/menu.png';
 import Bell from 'RoyalAutomobileClub/assets/icons/bell.png';

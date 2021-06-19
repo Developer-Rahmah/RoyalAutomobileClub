@@ -3,7 +3,7 @@ import {I18nManager} from 'react-native';
 import {Image, ImageSourcePropType} from 'react-native';
 import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
-import {SCREEN_WIDTH} from './src/services/helper/Constant';
+import {SCREEN_WIDTH} from '../services/helper/Constant';
 
 export default function IconImage({
   source,
