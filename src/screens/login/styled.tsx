@@ -1,4 +1,4 @@
-import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
+import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
 import {
   SCREEN_HEIGHT,
   SCREEN_WIDTH,

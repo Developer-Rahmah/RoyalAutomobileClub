@@ -40,7 +40,6 @@ const AppNavigator = () => {
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
         ) : (
           <>
-            <Stack.Screen name="LoginScreen" component={LoginScreen} />
 
             <Stack.Screen
               name="ViewPagerDiscover"
@@ -48,6 +47,8 @@ const AppNavigator = () => {
             />
             <Stack.Screen name="ViewPagerOffer" component={ViewPagerOffer} />
             <Stack.Screen name="ViewPagerJoinUs" component={ViewPagerJoinUs} />
+            <Stack.Screen name="LoginScreen" component={LoginScreen} />
+
           </>
         )}
       </Stack.Navigator>

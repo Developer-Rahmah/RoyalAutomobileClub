@@ -10,10 +10,8 @@ import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
 import { ContainerView, ImageAndTextContainer, ImageContainer } from './styled';
 import General from 'RoyalAutomobileClub/assets/styles/General';
 import Button from 'RoyalAutomobileClub/src/components/Button';
-import { useNavigation } from '@react-navigation/native';
-import { ScrollView, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
-import { useSelector } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import Input from 'RoyalAutomobileClub/src/components/Input';
 import { Toast } from 'native-base';
@@ -50,72 +48,74 @@ export default function LoginScreen() {
   }
   return (
     <>
-      <Header title="Onboard" />
-      <ScrollView>
+      <Header title="Onboard" showBack />
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={General.flex}>
+        <ScrollView>
 
-        <ContainerView>
-          <ImageAndTextContainer >
-            <ImageContainer style={{ flex: 0 }}>
-              <IconImage source={LoginImg} style={ImageStyles.mediumImage} />
-            </ImageContainer>
-          </ImageAndTextContainer>
-          <View style={Elements.loginFieldsContainer}>
-            <Title title="Welcome back ," color={Colors.ORANGE} />
+          <ContainerView>
+            <ImageAndTextContainer >
+              <ImageContainer style={{ flex: 0 }}>
+                <IconImage source={LoginImg} style={ImageStyles.mediumImage} />
+              </ImageContainer>
+            </ImageAndTextContainer>
+            <View style={Elements.loginFieldsContainer}>
+              <Title title="Welcome back ," color={Colors.ORANGE} />
 
-            <Controller
-              control={control}
-              render={({ field: { onChange, value, onBlur } }) => (
-                <Input
-                  placeholder={t("Email")}
-                  leftIcon={User}
-                  onChangeText={(value: string) => onChange(value)}
-                  value={value}
-                />
-              )}
-              name='email'
-              rules={{
-                required: true,
-                pattern: {
-                  value: validateEmail,
-                },
-              }}
-            />
-            {errors.email && <ErrorMsg errorMsg='Invalid Email Address.' />}
+              <Controller
+                control={control}
+                render={({ field: { onChange, value, onBlur } }) => (
+                  <Input
+                    placeholder={t("Email")}
+                    leftIcon={User}
+                    onChangeText={(value: string) => onChange(value)}
+                    value={value}
+                  />
+                )}
+                name='email'
+                rules={{
+                  required: true,
+                  pattern: {
+                    value: validateEmail,
+                  },
+                }}
+              />
+              {errors.email && <ErrorMsg errorMsg='Invalid Email Address.' />}
 
-            <Controller
-              control={control}
-              render={({ field: { onChange, value, onBlur } }) => (
-                <Input
-                  isPassword
-                  leftIcon={Lock}
-                  placeholder={t('Password')}
-                  onChangeText={(value: string) => onChange(value)}
-                  value={value}
-                />
-              )}
-              name='password'
-              rules={{ required: true }}
-            />
-            {errors.password && <ErrorMsg errorMsg='This is required.' />}
+              <Controller
+                control={control}
+                render={({ field: { onChange, value, onBlur } }) => (
+                  <Input
+                    isPassword
+                    leftIcon={Lock}
+                    placeholder={t('Password')}
+                    onChangeText={(value: string) => onChange(value)}
+                    value={value}
+                  />
+                )}
+                name='password'
+                rules={{ required: true }}
+              />
+              {errors.password && <ErrorMsg errorMsg='This is required.' />}
 
-            <Title
-              title="Forget Password?"
-              style={General.smallTopMargin}
-              color={Colors.ORANGE}
-            />
-          </View>
-          <View style={Elements.btnContainer}>
-            <Button
-              locked={
-                !isValid
+              <Title
+                title="Forget Password?"
+                style={General.smallTopMargin}
+                color={Colors.ORANGE}
+              />
+            </View>
+            <View style={Elements.btnContainer}>
+              <Button
+                locked={
+                  !isValid
 
-              }
-              onClick={handleSubmit(onSubmit)} title="Login" txtColor={Colors.WHITE} />
-            <Title title="Create an account" color={Colors.ORANGE} />
-          </View>
+                }
+                onClick={handleSubmit(onSubmit)} title="Login" txtColor={Colors.WHITE} />
+              <Title title="Create an account" color={Colors.ORANGE} />
+            </View>
 
-        </ContainerView>
-      </ScrollView>
+          </ContainerView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </>
   );
 }
