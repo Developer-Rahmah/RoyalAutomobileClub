@@ -39,6 +39,12 @@ const General = StyleSheet.create({
   horizontalPadding: {
     paddingHorizontal: 10,
   },
+  color: {
+    color: Colors.ORANGE,
+  },
+  underline: {
+    textDecorationLine: 'underline',
+  },
 
   verticalPadding: {
     paddingVertical: Dimensions.get('window').height / 17,
@@ -77,7 +83,7 @@ const General = StyleSheet.create({
   },
 
   smallTopMargin: {
-    marginTop: Dimensions.get('window').height / 50,
+    marginTop: Dimensions.get('window').height / 75,
   },
   border: {
     borderWidth: 1,

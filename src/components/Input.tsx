@@ -11,7 +11,7 @@ import IconImage from './IconImage'
 
 export default function Input({
   onChangeText,
-
+  keyboardType,
   leftIcon: leftIcon,
   placeholder,
   isPassword,
@@ -61,7 +61,7 @@ export default function Input({
       baseColor={Colors.GRAY}
       affixTextStyle={{ marginTop: -20 }}
       contentInset={{ input: -5 }}
-
+      keyboardType={keyboardType}
       inputContainerStyle={Layout.flexCenter}
       tvParallaxShiftDistanceY={-100}
       onChangeText={onChangeText}

@@ -4,7 +4,7 @@ import Title from 'RoyalAutomobileClub/src/components/Title';
 import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
 import LoginImg from 'RoyalAutomobileClub/assets/images/login.png';
 import Lock from 'RoyalAutomobileClub/assets/icons/lock.png';
-import User from 'RoyalAutomobileClub/assets/icons/user.png';
+import Email from 'RoyalAutomobileClub/assets/icons/email.png';
 import ImageStyles from 'RoyalAutomobileClub/assets/styles/ImageStyles';
 import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
 import { ContainerView, ImageAndTextContainer, ImageContainer } from './styled';
@@ -48,7 +48,7 @@ export default function LoginScreen() {
   }
   return (
     <>
-      <Header title="Onboard" showBack />
+      <Header title="Login" showBack />
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={General.flex}>
         <ScrollView>
 
@@ -65,8 +65,9 @@ export default function LoginScreen() {
                 control={control}
                 render={({ field: { onChange, value, onBlur } }) => (
                   <Input
+                    keyboardType='email-address'
                     placeholder={t("Email")}
-                    leftIcon={User}
+                    leftIcon={Email}
                     onChangeText={(value: string) => onChange(value)}
                     value={value}
                   />

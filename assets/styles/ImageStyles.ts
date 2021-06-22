@@ -1,11 +1,11 @@
-import {StyleSheet, Dimensions} from 'react-native';
-import {SCREEN_WIDTH} from 'RoyalAutomobileClub/src/services/helper/Constant';
-const WIDTH = Dimensions.get('window').width;
+import {StyleSheet, Dimensions} from 'react-native'
+import {SCREEN_WIDTH} from 'RoyalAutomobileClub/src/services/helper/Constant'
+const WIDTH = Dimensions.get('window').width
 
 const ImageStyles = StyleSheet.create({
   teaserImage: {
-    width: '100%',
-    height: WIDTH / 2,
+    width: WIDTH / 3,
+    height: WIDTH / 3,
   },
   smallTeaserImage: {
     width: WIDTH / 5,
@@ -43,5 +43,5 @@ const ImageStyles = StyleSheet.create({
     height: SCREEN_WIDTH / 17,
     resizeMode: 'contain',
   },
-});
-export default ImageStyles;
+})
+export default ImageStyles

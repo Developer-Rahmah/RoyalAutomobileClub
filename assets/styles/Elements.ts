@@ -37,7 +37,7 @@ const Elements = StyleSheet.create({
     height: 50,
   },
   summary: {
-    color: Colors.LIGHT_GRAY,
+    color: Colors.BLACK,
     fontFamily: 'Poppins-Regular',
     fontSize: 15,
     textAlign: 'left',
