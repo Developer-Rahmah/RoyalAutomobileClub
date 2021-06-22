@@ -10,11 +10,13 @@ export default function IconImage({
   color,
   small,
   style,
+  transform = true
 }: {
   source: ImageSourcePropType;
   color?: Colors;
   small?: boolean;
   style?: {};
+  transform?: boolean
 }) {
   return (
     <Image
@@ -30,7 +32,7 @@ export default function IconImage({
           : Elements.icon,
         {
           tintColor: color,
-          transform: [{ rotateY: I18nManager.isRTL ? '180deg' : '0deg' }],
+          transform: [{ rotateY: transform ? I18nManager.isRTL ? '180deg' : '0deg' : '0deg' }],
         },
         style,
       ]}

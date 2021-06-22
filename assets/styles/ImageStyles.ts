@@ -7,14 +7,25 @@ const ImageStyles = StyleSheet.create({
     width: WIDTH / 3,
     height: WIDTH / 3,
   },
-  smallTeaserImage: {
+  userProfile: {
+    width: WIDTH / 3,
+    height: WIDTH / 3,
+    borderRadius: WIDTH / 1.5,
+  },
+  lTeaserImage: {
     width: WIDTH / 5,
     height: WIDTH / 5,
     resizeMode: 'contain',
   },
   mediumImage: {
-    width: WIDTH / 1.2,
-    height: WIDTH / 1.2,
+    width: WIDTH / 1.5,
+    height: WIDTH / 1.5,
+    marginBottom: 10,
+    resizeMode: 'contain',
+  },
+  congratsImage: {
+    width: WIDTH / 2,
+    height: WIDTH / 2,
     resizeMode: 'contain',
   },
   posterImage: {

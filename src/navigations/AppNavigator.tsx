@@ -10,6 +10,7 @@ import ViewPagerOffer from '../screens/viewPager/ViewPagerOffer';
 import ViewPagerJoinUs from '../screens/viewPager/ViewPagerJoinUs';
 import LoginScreen from '../screens/login/LoginScreen';
 import RegisterScreen from '../screens/register/RegisterScreen';
+import CongratsScreen from '../screens/register/CongratsScreen';
 
 const AppNavigator = () => {
   interface RootState {
@@ -41,7 +42,6 @@ const AppNavigator = () => {
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
         ) : (
           <>
-            <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
 
             <Stack.Screen
               name="ViewPagerDiscover"
@@ -50,6 +50,9 @@ const AppNavigator = () => {
             <Stack.Screen name="ViewPagerOffer" component={ViewPagerOffer} />
             <Stack.Screen name="ViewPagerJoinUs" component={ViewPagerJoinUs} />
             <Stack.Screen name="LoginScreen" component={LoginScreen} />
+            <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+            <Stack.Screen name="CongratsScreen" component={CongratsScreen} />
+
 
           </>
         )}

@@ -4,7 +4,7 @@ import Title from 'RoyalAutomobileClub/src/components/Title';
 import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
 import JoinUs from 'RoyalAutomobileClub/assets/images/join-us.png';
 import ImageStyles from 'RoyalAutomobileClub/assets/styles/ImageStyles';
-import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
+import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
 import {
   ContainerView,
   ImageAndTextContainer,
@@ -16,8 +16,8 @@ import {
 } from './styled';
 import General from 'RoyalAutomobileClub/assets/styles/General';
 import Button from 'RoyalAutomobileClub/src/components/Button';
-import {useNavigation} from '@react-navigation/native';
-import {View} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { View } from 'react-native';
 
 export default function ViewPagerJoinUs() {
   const navigation = useNavigation();
@@ -29,9 +29,9 @@ export default function ViewPagerJoinUs() {
           <ImageContainer>
             <IconImage source={JoinUs} style={ImageStyles.mediumImage} />
           </ImageContainer>
-          <SliderTitleContainer>
-            <Title title="Join Us" fontFamily="Poppins-Medium" large />
-          </SliderTitleContainer>
+          {/* <SliderTitleContainer> */}
+          <Title title="Join Us" fontFamily="Poppins-Medium" large />
+          {/* </SliderTitleContainer> */}
 
           <View style={General.horizontalPadding}>
             <Title

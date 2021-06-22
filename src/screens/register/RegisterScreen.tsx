@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Header from 'RoyalAutomobileClub/src/components/Header';
 import Title from 'RoyalAutomobileClub/src/components/Title';
 import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
@@ -12,7 +12,7 @@ import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
 import { ContainerView, ImageAndTextContainer, ImageContainer } from './styled';
 import General from 'RoyalAutomobileClub/assets/styles/General';
 import Button from 'RoyalAutomobileClub/src/components/Button';
-import { KeyboardAvoidingView, Platform, ScrollView, View, Text } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, View, TouchableOpacity, Image } from 'react-native';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
 import { useForm, Controller } from 'react-hook-form';
 import Input from 'RoyalAutomobileClub/src/components/Input';
@@ -21,9 +21,13 @@ import ErrorMsg from 'RoyalAutomobileClub/src/components/ErrorMsg';
 import { validateEmail } from 'RoyalAutomobileClub/src/services/helper/validation';
 import { useTranslation } from 'RoyalAutomobileClub/src/services/hooks';
 import Layout from 'RoyalAutomobileClub/assets/styles/Layout';
+import { useNavigation } from '@react-navigation/native';
+import * as ImagePicker from 'expo-image-picker';
 
 export default function RegisterScreen() {
+  const [image, setImage] = useState(null);
 
+  const navigation = useNavigation();
   const t = useTranslation()
   const {
     control,
@@ -51,7 +55,7 @@ export default function RegisterScreen() {
 
     } else {
       Toast.show({
-        text: t('Welcome back'),
+        text: t('Registered Successfully'),
         textStyle: {
           color: Colors.WHITE,
           fontSize: 20,
@@ -64,9 +68,34 @@ export default function RegisterScreen() {
         position: 'bottom',
         onClose: reason => { },
       })
-    }
+      navigation.navigate('CongratsScreen')
 
+    }
   }
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+        }
+      }
+    })();
+  }, [image]);
   return (
     <>
       <Header title="Register" showBack />
@@ -75,8 +104,15 @@ export default function RegisterScreen() {
 
           <ContainerView style={General.whiteBackgroundColor}>
             <ImageAndTextContainer >
-              <ImageContainer style={{ flex: 0 }}>
-                <IconImage source={AddImg} style={[ImageStyles.teaserImage,]} />
+              <ImageContainer style={General.smallPadding}>
+                <TouchableOpacity onPress={pickImage}>
+                  {/* <IconImage source={AddImg} style={[ImageStyles.teaserImage,]} /> */}
+                  {image != null ?
+                    <Image source={{ uri: image }} style={[ImageStyles.teaserImage, ImageStyles.userProfile]} />
+                    :
+                    <IconImage source={AddImg} style={[ImageStyles.teaserImage,]} />
+                  }
+                </TouchableOpacity>
               </ImageContainer>
             </ImageAndTextContainer>
             <View style={Elements.loginFieldsContainer}>
@@ -98,7 +134,7 @@ export default function RegisterScreen() {
 
                 }}
               />
-              {errors.email && <ErrorMsg errorMsg='This is required.' />}
+              {errors.firstName && <ErrorMsg errorMsg='This is required.' />}
 
               <Controller
                 control={control}
@@ -116,7 +152,7 @@ export default function RegisterScreen() {
 
                 }}
               />
-              {errors.email && <ErrorMsg errorMsg='This is required.' />}
+              {errors.lastName && <ErrorMsg errorMsg='This is required.' />}
               <Controller
                 control={control}
                 render={({ field: { onChange, value, onBlur } }) => (
@@ -128,13 +164,13 @@ export default function RegisterScreen() {
                     value={value}
                   />
                 )}
-                name='membershipNo.'
+                name='membershipNo'
                 rules={{
                   required: true,
 
                 }}
               />
-              {errors.email && <ErrorMsg errorMsg='This is required.' />}
+              {errors.membershipNo && <ErrorMsg errorMsg='This is required.' />}
               <Controller
                 control={control}
                 render={({ field: { onChange, value, onBlur } }) => (
@@ -187,7 +223,7 @@ export default function RegisterScreen() {
                 name='confirmPassword'
                 rules={{ required: true }}
               />
-              {errors.password && <ErrorMsg errorMsg='This is required.' />}
+              {errors.confirmPassword && <ErrorMsg errorMsg='This is required.' />}
 
 
             </View>
@@ -207,9 +243,10 @@ export default function RegisterScreen() {
                 <Title title="Privacy Policy" color={Colors.ORANGE} style={General.smallTopMargin} />
 
               </View>
-              {/* <Text style={Elements.summary}>By Signing up you are accepting our
-                <Text style={[Elements.summary, General.color]}>Terms of use</Text> <Text style={[Elements.summary,]}>and  <Text style={[Elements.summary, General.color]}>Privacy Policy</Text></Text></Text> */}
-              <Title title="I have an account already" color={Colors.ORANGE} style={[General.underline, Layout.margin]} />
+
+              <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
+                <Title title="I have an account already" color={Colors.ORANGE} style={[General.underline, Layout.margin]} />
+              </TouchableOpacity>
             </View>
 
           </ContainerView>

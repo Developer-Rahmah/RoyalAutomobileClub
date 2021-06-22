@@ -19,5 +19,6 @@ export enum Colors {
   DARK_GRAY_2 = '#7e84a3',
   LIGHT_GRAY_2 = '#CBCBCB',
   LIGHT_GRAY_3 = '#e6e9f4',
+  LIGHT_GRAY_4 = '#707070',
   SUCCESS = '#22BB33',
 }

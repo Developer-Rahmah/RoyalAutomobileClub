@@ -10,7 +10,7 @@ import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
 import { ContainerView, ImageAndTextContainer, ImageContainer } from './styled';
 import General from 'RoyalAutomobileClub/assets/styles/General';
 import Button from 'RoyalAutomobileClub/src/components/Button';
-import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, View, TouchableOpacity } from 'react-native';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
 import { useForm, Controller } from 'react-hook-form';
 import Input from 'RoyalAutomobileClub/src/components/Input';
@@ -18,9 +18,10 @@ import { Toast } from 'native-base';
 import ErrorMsg from 'RoyalAutomobileClub/src/components/ErrorMsg';
 import { validateEmail } from 'RoyalAutomobileClub/src/services/helper/validation';
 import { useTranslation } from 'RoyalAutomobileClub/src/services/hooks';
+import { useNavigation } from '@react-navigation/native';
 
 export default function LoginScreen() {
-
+  const navigation = useNavigation();
   const t = useTranslation()
   const {
     control,
@@ -111,7 +112,9 @@ export default function LoginScreen() {
 
                 }
                 onClick={handleSubmit(onSubmit)} title="Login" txtColor={Colors.WHITE} />
-              <Title title="Create an account" color={Colors.ORANGE} />
+              <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
+                <Title title="Create an account" color={Colors.ORANGE} />
+              </TouchableOpacity>
             </View>
 
           </ContainerView>
