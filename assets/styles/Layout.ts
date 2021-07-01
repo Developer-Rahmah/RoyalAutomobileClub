@@ -1,6 +1,6 @@
-import {StyleSheet, Dimensions} from 'react-native'
-import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors'
-const WIDTH = Dimensions.get('window').width
+import {StyleSheet, Dimensions} from 'react-native';
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
+const WIDTH = Dimensions.get('window').width;
 
 const Layout = StyleSheet.create({
   card: {
@@ -103,6 +103,6 @@ const Layout = StyleSheet.create({
   largeHorizontalPadding: {
     paddingHorizontal: Dimensions.get('window').width / 15,
   },
-})
+});
 
-export default Layout
+export default Layout;

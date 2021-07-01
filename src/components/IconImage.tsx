@@ -1,22 +1,24 @@
 import React from 'react';
-import { I18nManager } from 'react-native';
-import { Image, ImageSourcePropType } from 'react-native';
-import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
+import {I18nManager} from 'react-native';
+import {Image, ImageSourcePropType} from 'react-native';
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
-import { SCREEN_WIDTH } from '../services/helper/Constant';
+import {SCREEN_WIDTH} from '../services/helper/Constant';
 
 export default function IconImage({
   source,
   color,
   small,
   style,
-  transform = true
+  transform = true,
+  verySmall = false,
 }: {
   source: ImageSourcePropType;
   color?: Colors;
   small?: boolean;
   style?: {};
-  transform?: boolean
+  transform?: boolean;
+  verySmall?: boolean;
 }) {
   return (
     <Image
@@ -25,14 +27,23 @@ export default function IconImage({
       style={[
         small
           ? {
-            width: SCREEN_WIDTH / 17,
-            height: SCREEN_WIDTH / 17,
-            resizeMode: 'contain'
-          }
+              width: SCREEN_WIDTH / 17,
+              height: SCREEN_WIDTH / 17,
+            }
+          : verySmall
+          ? {width: SCREEN_WIDTH / 33, height: SCREEN_WIDTH / 33}
           : Elements.icon,
         {
           tintColor: color,
-          transform: [{ rotateY: transform ? I18nManager.isRTL ? '180deg' : '0deg' : '0deg' }],
+          transform: [
+            {
+              rotateY: transform
+                ? I18nManager.isRTL
+                  ? '180deg'
+                  : '0deg'
+                : '0deg',
+            },
+          ],
         },
         style,
       ]}

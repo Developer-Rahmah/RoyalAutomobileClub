@@ -5,7 +5,7 @@ import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
 import RightArrow from 'RoyalAutomobileClub/assets/icons/right-arrow.png';
 import Offer from 'RoyalAutomobileClub/assets/images/offer.png';
 import ImageStyles from 'RoyalAutomobileClub/assets/styles/ImageStyles';
-import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import {
   ContainerView,
   ImageAndTextContainer,
@@ -18,8 +18,8 @@ import {
 } from './styled';
 import General from 'RoyalAutomobileClub/assets/styles/General';
 import Button from 'RoyalAutomobileClub/src/components/Button';
-import { useNavigation } from '@react-navigation/native';
-import { TouchableOpacity, View } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {TouchableOpacity, View} from 'react-native';
 
 export default function ViewPagerOffer() {
   const navigation = useNavigation();
@@ -56,13 +56,16 @@ export default function ViewPagerOffer() {
           />
           <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
             <SkipContainer>
-
-              <Title title="Skip" color={Colors.ORANGE} style={{ marginEnd: 3 }} />
+              <Title
+                title="Skip"
+                color={Colors.ORANGE}
+                style={{marginEnd: 3}}
+              />
 
               <IconImage
                 source={RightArrow}
                 small
-                style={{ marginStart: 3, resizeMode: 'contain' }}
+                style={{marginStart: 3, resizeMode: 'contain'}}
               />
             </SkipContainer>
           </TouchableOpacity>

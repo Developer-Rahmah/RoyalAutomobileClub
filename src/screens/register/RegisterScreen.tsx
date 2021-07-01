@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Header from 'RoyalAutomobileClub/src/components/Header';
 import Title from 'RoyalAutomobileClub/src/components/Title';
 import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
@@ -8,34 +8,41 @@ import User from 'RoyalAutomobileClub/assets/icons/user.png';
 import Email from 'RoyalAutomobileClub/assets/icons/email.png';
 import Contacts from 'RoyalAutomobileClub/assets/icons/contacts.png';
 import ImageStyles from 'RoyalAutomobileClub/assets/styles/ImageStyles';
-import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
-import { ContainerView, ImageAndTextContainer, ImageContainer } from './styled';
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
+import {ContainerView, ImageAndTextContainer, ImageContainer} from './styled';
 import General from 'RoyalAutomobileClub/assets/styles/General';
 import Button from 'RoyalAutomobileClub/src/components/Button';
-import { KeyboardAvoidingView, Platform, ScrollView, View, TouchableOpacity, Image } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  View,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
-import { useForm, Controller } from 'react-hook-form';
+import {useForm, Controller} from 'react-hook-form';
 import Input from 'RoyalAutomobileClub/src/components/Input';
-import { Toast } from 'native-base';
+import {Toast} from 'native-base';
 import ErrorMsg from 'RoyalAutomobileClub/src/components/ErrorMsg';
-import { validateEmail } from 'RoyalAutomobileClub/src/services/helper/validation';
-import { useTranslation } from 'RoyalAutomobileClub/src/services/hooks';
+import {validateEmail} from 'RoyalAutomobileClub/src/services/helper/validation';
+import {useTranslation} from 'RoyalAutomobileClub/src/services/hooks';
 import Layout from 'RoyalAutomobileClub/assets/styles/Layout';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 
 export default function RegisterScreen() {
   const [image, setImage] = useState(null);
 
   const navigation = useNavigation();
-  const t = useTranslation()
+  const t = useTranslation();
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid }
+    formState: {errors, isValid},
   } = useForm({
-    mode: 'onChange'
-  })
+    mode: 'onChange',
+  });
   const onSubmit = (data: any) => {
     if (data.password != data.confirmPassword) {
       Toast.show({
@@ -43,37 +50,35 @@ export default function RegisterScreen() {
         textStyle: {
           color: Colors.WHITE,
           fontSize: 20,
-          fontFamily: "Poppins-Medium",
-          textAlign: 'center'
+          fontFamily: 'Poppins-Medium',
+          textAlign: 'center',
         },
-        style: { backgroundColor: Colors.RED, },
+        style: {backgroundColor: Colors.RED},
 
         duration: 2000,
         position: 'bottom',
-        onClose: reason => { },
-      })
-
+        onClose: (reason) => {},
+      });
     } else {
       Toast.show({
         text: t('Registered Successfully'),
         textStyle: {
           color: Colors.WHITE,
           fontSize: 20,
-          fontFamily: "Poppins-Medium",
-          textAlign: 'center'
+          fontFamily: 'Poppins-Medium',
+          textAlign: 'center',
         },
-        style: { backgroundColor: Colors.SUCCESS, },
+        style: {backgroundColor: Colors.SUCCESS},
 
         duration: 2000,
         position: 'bottom',
-        onClose: reason => { },
-      })
-      navigation.navigate('CongratsScreen')
-
+        onClose: (reason) => {},
+      });
+      navigation.navigate('CongratsScreen');
     }
-  }
+  };
   const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
@@ -89,7 +94,8 @@ export default function RegisterScreen() {
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        const {status} =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== 'granted') {
           alert('Sorry, we need camera roll permissions to make this work!');
         }
@@ -99,90 +105,92 @@ export default function RegisterScreen() {
   return (
     <>
       <Header title="Register" showBack />
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={General.flex}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={General.flex}>
         <ScrollView>
-
           <ContainerView style={General.whiteBackgroundColor}>
-            <ImageAndTextContainer >
+            <ImageAndTextContainer>
               <ImageContainer style={General.smallPadding}>
                 <TouchableOpacity onPress={pickImage}>
                   {/* <IconImage source={AddImg} style={[ImageStyles.teaserImage,]} /> */}
-                  {image != null ?
-                    <Image source={{ uri: image }} style={[ImageStyles.teaserImage, ImageStyles.userProfile]} />
-                    :
-                    <IconImage source={AddImg} style={[ImageStyles.teaserImage,]} />
-                  }
+                  {image != null ? (
+                    <Image
+                      source={{uri: image}}
+                      style={[ImageStyles.teaserImage, ImageStyles.userProfile]}
+                    />
+                  ) : (
+                    <IconImage
+                      source={AddImg}
+                      style={[ImageStyles.teaserImage]}
+                    />
+                  )}
                 </TouchableOpacity>
               </ImageContainer>
             </ImageAndTextContainer>
             <View style={Elements.loginFieldsContainer}>
-
-
               <Controller
                 control={control}
-                render={({ field: { onChange, value, onBlur } }) => (
+                render={({field: {onChange, value, onBlur}}) => (
                   <Input
-                    placeholder={t("First Name")}
+                    placeholder={t('First Name')}
                     leftIcon={User}
                     onChangeText={(value: string) => onChange(value)}
                     value={value}
                   />
                 )}
-                name='firstName'
+                name="firstName"
                 rules={{
-                  required: true
-
+                  required: true,
                 }}
               />
-              {errors.firstName && <ErrorMsg errorMsg='This is required.' />}
+              {errors.firstName && <ErrorMsg errorMsg="This is required." />}
 
               <Controller
                 control={control}
-                render={({ field: { onChange, value, onBlur } }) => (
+                render={({field: {onChange, value, onBlur}}) => (
                   <Input
-                    placeholder={t("Last Name")}
+                    placeholder={t('Last Name')}
                     leftIcon={User}
                     onChangeText={(value: string) => onChange(value)}
                     value={value}
                   />
                 )}
-                name='lastName'
+                name="lastName"
                 rules={{
-                  required: true
-
+                  required: true,
                 }}
               />
-              {errors.lastName && <ErrorMsg errorMsg='This is required.' />}
+              {errors.lastName && <ErrorMsg errorMsg="This is required." />}
               <Controller
                 control={control}
-                render={({ field: { onChange, value, onBlur } }) => (
+                render={({field: {onChange, value, onBlur}}) => (
                   <Input
-                    keyboardType='number-pad'
-                    placeholder={t("Membership No.")}
+                    keyboardType="number-pad"
+                    placeholder={t('Membership No.')}
                     leftIcon={Contacts}
                     onChangeText={(value: string) => onChange(value)}
                     value={value}
                   />
                 )}
-                name='membershipNo'
+                name="membershipNo"
                 rules={{
                   required: true,
-
                 }}
               />
-              {errors.membershipNo && <ErrorMsg errorMsg='This is required.' />}
+              {errors.membershipNo && <ErrorMsg errorMsg="This is required." />}
               <Controller
                 control={control}
-                render={({ field: { onChange, value, onBlur } }) => (
+                render={({field: {onChange, value, onBlur}}) => (
                   <Input
-                    keyboardType='email-address'
-                    placeholder={t("Email")}
+                    keyboardType="email-address"
+                    placeholder={t('Email')}
                     leftIcon={Email}
                     onChangeText={(value: string) => onChange(value)}
                     value={value}
                   />
                 )}
-                name='email'
+                name="email"
                 rules={{
                   required: true,
                   pattern: {
@@ -190,13 +198,11 @@ export default function RegisterScreen() {
                   },
                 }}
               />
-              {errors.email && <ErrorMsg errorMsg='Invalid Email Address.' />}
-
-
+              {errors.email && <ErrorMsg errorMsg="Invalid Email Address." />}
 
               <Controller
                 control={control}
-                render={({ field: { onChange, value, onBlur } }) => (
+                render={({field: {onChange, value, onBlur}}) => (
                   <Input
                     isPassword
                     leftIcon={Lock}
@@ -205,13 +211,13 @@ export default function RegisterScreen() {
                     value={value}
                   />
                 )}
-                name='password'
-                rules={{ required: true }}
+                name="password"
+                rules={{required: true}}
               />
-              {errors.password && <ErrorMsg errorMsg='This is required.' />}
+              {errors.password && <ErrorMsg errorMsg="This is required." />}
               <Controller
                 control={control}
-                render={({ field: { onChange, value, onBlur } }) => (
+                render={({field: {onChange, value, onBlur}}) => (
                   <Input
                     isPassword
                     leftIcon={Lock}
@@ -220,35 +226,53 @@ export default function RegisterScreen() {
                     value={value}
                   />
                 )}
-                name='confirmPassword'
-                rules={{ required: true }}
+                name="confirmPassword"
+                rules={{required: true}}
               />
-              {errors.confirmPassword && <ErrorMsg errorMsg='This is required.' />}
-
-
+              {errors.confirmPassword && (
+                <ErrorMsg errorMsg="This is required." />
+              )}
             </View>
             <View style={Elements.btnContainer}>
               <Button
-                locked={
-                  !isValid
-
-                }
-                onClick={handleSubmit(onSubmit)} title="Register" txtColor={Colors.WHITE} />
+                locked={!isValid}
+                onClick={handleSubmit(onSubmit)}
+                title="Register"
+                txtColor={Colors.WHITE}
+              />
               {/* <Title title="Create an account" color={Colors.ORANGE} /> */}
-              <Title title="By Signing up you are accepting our" color={Colors.BLACK} />
+              <Title
+                title="By Signing up you are accepting our"
+                color={Colors.BLACK}
+              />
 
               <View style={Layout.flexDirectionRow}>
-                <Title title="Terms of use" color={Colors.ORANGE} style={General.smallTopMargin} />
-                <Title title=" and  " color={Colors.BLACK} style={General.smallTopMargin} />
-                <Title title="Privacy Policy" color={Colors.ORANGE} style={General.smallTopMargin} />
-
+                <Title
+                  title="Terms of use"
+                  color={Colors.ORANGE}
+                  style={General.smallTopMargin}
+                />
+                <Title
+                  title=" and  "
+                  color={Colors.BLACK}
+                  style={General.smallTopMargin}
+                />
+                <Title
+                  title="Privacy Policy"
+                  color={Colors.ORANGE}
+                  style={General.smallTopMargin}
+                />
               </View>
 
-              <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
-                <Title title="I have an account already" color={Colors.ORANGE} style={[General.underline, Layout.margin]} />
+              <TouchableOpacity
+                onPress={() => navigation.navigate('LoginScreen')}>
+                <Title
+                  title="I have an account already"
+                  color={Colors.ORANGE}
+                  style={[General.underline, Layout.margin]}
+                />
               </TouchableOpacity>
             </View>
-
           </ContainerView>
         </ScrollView>
       </KeyboardAvoidingView>

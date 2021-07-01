@@ -1,60 +1,39 @@
-import React, { useEffect } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import WelcomeScreen from 'RoyalAutomobileClub/src/screens/welcome/WelcomeScreen';
-import { useDispatch, useSelector } from 'react-redux';
-import { setLanguageAction } from '../services/redux/actions';
+import {createStackNavigator} from '@react-navigation/stack';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+
 import LocalStorage from '../services/helper/LocalStorage';
-import { I18nManager } from 'react-native';
-import ViewPagerDiscover from '../screens/viewPager/ViewPagerDiscover';
-import ViewPagerOffer from '../screens/viewPager/ViewPagerOffer';
-import ViewPagerJoinUs from '../screens/viewPager/ViewPagerJoinUs';
-import LoginScreen from '../screens/login/LoginScreen';
-import RegisterScreen from '../screens/register/RegisterScreen';
-import CongratsScreen from '../screens/register/CongratsScreen';
+import {setAuthTokenAction} from '../services/redux/actions';
+import NonUserNavigator from './NonUserNavigator';
+import UsersNavigator from './UsersNavigator';
 
 const AppNavigator = () => {
   interface RootState {
-    langCode: string;
+    authToken: string;
   }
-  const selectLangCode = (state: RootState) => state.langCode;
-  const langCode = useSelector(selectLangCode);
+  const token = (state: RootState) => state.authToken;
+  const useToken = useSelector(token);
   const dispatch = useDispatch();
-  const getLang = async () => {
-    const lang = await LocalStorage.get('lang');
+  const getToken = async () => {
+    const authToken = await LocalStorage.get('authToken');
+    console.log('authToken', authToken);
 
-    dispatch(setLanguageAction(lang));
-    if (lang == 'ar') {
-      I18nManager.forceRTL(true);
-    } else {
-      I18nManager.forceRTL(false);
-    }
+    dispatch(setAuthTokenAction(authToken));
   };
   useEffect(() => {
-    getLang();
+    getToken();
   }, []);
 
   const Stack = createStackNavigator();
+  console.log('rrrrrr', useToken === null );
 
   return (
     <>
       <Stack.Navigator headerMode="none">
-        {langCode == null ? (
-          <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        {useToken === null ? (
+          <Stack.Screen name="NonUser" component={NonUserNavigator} />
         ) : (
-          <>
-
-            <Stack.Screen
-              name="ViewPagerDiscover"
-              component={ViewPagerDiscover}
-            />
-            <Stack.Screen name="ViewPagerOffer" component={ViewPagerOffer} />
-            <Stack.Screen name="ViewPagerJoinUs" component={ViewPagerJoinUs} />
-            <Stack.Screen name="LoginScreen" component={LoginScreen} />
-            <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-            <Stack.Screen name="CongratsScreen" component={CongratsScreen} />
-
-
-          </>
+          <Stack.Screen name="User" component={UsersNavigator} />
         )}
       </Stack.Navigator>
     </>

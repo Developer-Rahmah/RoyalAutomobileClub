@@ -4,7 +4,7 @@ import Title from 'RoyalAutomobileClub/src/components/Title';
 import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
 import Congrats from 'RoyalAutomobileClub/assets/images/congrats.png';
 import ImageStyles from 'RoyalAutomobileClub/assets/styles/ImageStyles';
-import { Colors } from 'RoyalAutomobileClub/assets/styles/Colors';
+import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import {
   ContainerView,
   ImageAndTextContainer,
@@ -13,18 +13,23 @@ import {
 } from './styled';
 import General from 'RoyalAutomobileClub/assets/styles/General';
 import Button from 'RoyalAutomobileClub/src/components/Button';
-import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, View } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {StyleSheet, View} from 'react-native';
 
 export default function CongratsScreen() {
   const navigation = useNavigation();
   return (
     <>
       <Header title="Confirmation" showBack />
-      <ContainerView style={{ justifyContent: 'space-evenly', backgroundColor: 'white' }}>
-        <ImageAndTextContainer  >
-          <ImageContainer >
-            <IconImage transform={false} source={Congrats} style={ImageStyles.congratsImage} />
+      <ContainerView
+        style={{justifyContent: 'space-evenly', backgroundColor: 'white'}}>
+        <ImageAndTextContainer>
+          <ImageContainer>
+            <IconImage
+              transform={false}
+              source={Congrats}
+              style={ImageStyles.congratsImage}
+            />
           </ImageContainer>
           <SliderTitleContainer>
             <Title title="Congrats !" fontFamily="Poppins-Medium" large />
@@ -42,13 +47,11 @@ export default function CongratsScreen() {
           </View>
         </ImageAndTextContainer>
 
-
         <Button
           // onClick={() => navigation.navigate('LoginScreen')}
           txtColor={Colors.WHITE}
           title="Continue to Home"
         />
-
       </ContainerView>
     </>
   );
@@ -56,7 +59,7 @@ export default function CongratsScreen() {
 
 const styles = StyleSheet.create({
   description: {
-    lineHeight: 23
+    lineHeight: 23,
   },
   flexCenter: {
     justifyContent: 'center',
