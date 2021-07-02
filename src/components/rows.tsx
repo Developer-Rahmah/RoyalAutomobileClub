@@ -25,17 +25,17 @@ export default function Rows({
 
   ...rest
 }: {
-  loading: boolean;
-  showsVerticalScrollIndicator: boolean;
-  bottomSpace: boolean;
-  largeBottomSpace: boolean;
-  renderItem: any;
-  usePadding: boolean;
-  paddingAmount: number;
-  isSectionList: boolean;
-  numColumns: number;
-  data: [];
-  rest: any;
+  loading?: boolean;
+  showsVerticalScrollIndicator?: boolean;
+  bottomSpace?: boolean;
+  largeBottomSpace?: boolean;
+  renderItem?: any;
+  usePadding?: boolean;
+  paddingAmount?: number;
+  isSectionList?: boolean;
+  numColumns?: number;
+  data?: any;
+  rest?: any;
 }) {
   const Listing = isSectionList ? SectionList : (FlatList as React.ElementType);
 

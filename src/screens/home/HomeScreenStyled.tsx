@@ -25,10 +25,11 @@ export const ImageAndTextContainer = styled.View`
   flex: 0.5;
 `;
 
-export const ImageContainer = styled.View`
+export const CarouselContainer = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  flex: 1;
 `;
 
 export const SliderTitleContainer = styled.View`
@@ -61,4 +62,20 @@ export const SkipContainer = styled.View`
   justify-content: center;
   align-items: center;
   flex-direction: row;
+`;
+export const ImageCarousel = styled.Image`
+  width: 100%;
+  height: 205px;
+  border-radius: 20px;
+`;
+export const SectionHeader = styled.View`
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  padding-vertical: 10px;
+`;
+export const MoreTxtContainer = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
