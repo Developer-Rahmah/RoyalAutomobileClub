@@ -15,8 +15,11 @@ import General from 'RoyalAutomobileClub/assets/styles/General';
 import Button from 'RoyalAutomobileClub/src/components/Button';
 import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, View} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {setAuthTokenAction} from 'RoyalAutomobileClub/src/services/redux/actions';
 
 export default function CongratsScreen() {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   return (
     <>
@@ -48,7 +51,7 @@ export default function CongratsScreen() {
         </ImageAndTextContainer>
 
         <Button
-          // onClick={() => navigation.navigate('LoginScreen')}
+          onClick={() => dispatch(setAuthTokenAction('ffff'))}
           txtColor={Colors.WHITE}
           title="Continue to Home"
         />

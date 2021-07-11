@@ -26,9 +26,12 @@ const Header = ({
   const navigation = useNavigation();
   return (
     <ImageBackground source={HeaderImg} style={[Layout.header]}>
-      {/* back icon */}
+      {/* back icon or menu */}
 
-      <TouchableOpacity onPress={() => navigation.goBack()}>
+      <TouchableOpacity
+        onPress={() =>
+          showMenu ? navigation.openDrawer() : navigation.goBack()
+        }>
         <IconImage
           source={showBack ? BackIcon : showMenu ? Menu : null}
           color={Colors.WHITE}

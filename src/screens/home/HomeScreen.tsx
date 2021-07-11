@@ -36,7 +36,7 @@ export default function HomeScreen() {
   });
   return (
     <>
-      <Header title="Home" showBack />
+      <Header title="Home" showMenu showBell />
 
       <ScrollView>
         <ContainerView>

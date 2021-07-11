@@ -25,7 +25,7 @@ const AppNavigator = () => {
   }, []);
 
   const Stack = createStackNavigator();
-  console.log('rrrrrr', useToken === null );
+  console.log('rrrrrr', useToken === null);
 
   return (
     <>

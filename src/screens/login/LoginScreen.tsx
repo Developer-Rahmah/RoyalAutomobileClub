@@ -25,10 +25,13 @@ import ErrorMsg from 'RoyalAutomobileClub/src/components/ErrorMsg';
 import {validateEmail} from 'RoyalAutomobileClub/src/services/helper/validation';
 import {useTranslation} from 'RoyalAutomobileClub/src/services/hooks';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {setAuthTokenAction} from 'RoyalAutomobileClub/src/services/redux/actions';
 
 export default function LoginScreen() {
   const navigation = useNavigation();
   const t = useTranslation();
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
@@ -51,6 +54,7 @@ export default function LoginScreen() {
       position: 'bottom',
       onClose: (reason) => {},
     });
+    dispatch(setAuthTokenAction('ffff'));
   };
   return (
     <>
