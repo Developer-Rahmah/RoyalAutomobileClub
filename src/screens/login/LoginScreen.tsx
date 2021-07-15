@@ -27,6 +27,7 @@ import {useTranslation} from 'RoyalAutomobileClub/src/services/hooks';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {setAuthTokenAction} from 'RoyalAutomobileClub/src/services/redux/actions';
+import LocalStorage from 'RoyalAutomobileClub/src/services/helper/LocalStorage';
 
 export default function LoginScreen() {
   const navigation = useNavigation();
@@ -55,6 +56,7 @@ export default function LoginScreen() {
       onClose: (reason) => {},
     });
     dispatch(setAuthTokenAction('ffff'));
+    LocalStorage.set('authToken', 'fffff');
   };
   return (
     <>

@@ -1,6 +1,6 @@
 import {NavigationContext, useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {ImageBackground, View} from 'react-native';
+import {ImageBackground, StyleSheet, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import Layout from 'RoyalAutomobileClub/assets/styles/Layout';
 import IconImage from '../IconImage';
@@ -30,18 +30,12 @@ const Menu = () => {
       style={[Layout.flexDirectionRow, Layout.cardPadding, {flex: 1}]}>
       <ScrollView>
         <NavigationContext.Provider value={navigation}>
-          <View
-            style={{
-              paddingVertical: '13%',
-              paddingBottom: '6%',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
+          <View style={styles.container}>
             <IconImage source={John} style={ImageStyles.teaserImage} />
             <Title title="John Smith" color={Colors.ORANGE} />
           </View>
           <View>
-            <MenuItem title="Home">
+            <MenuItem screenName="HomeScreen" title="Home">
               <Home height={27} width={27} />
             </MenuItem>
             <MenuItem title="About us">
@@ -68,7 +62,7 @@ const Menu = () => {
               <News height={27} width={27} />
             </MenuItem>
 
-            <MenuItem title="Settings">
+            <MenuItem screenName="SettingsScreen" title="Settings">
               <Settings height={27} width={27} />
             </MenuItem>
 
@@ -88,3 +82,11 @@ const Menu = () => {
 };
 
 export default Menu;
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: '13%',
+    paddingBottom: '6%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

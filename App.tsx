@@ -12,12 +12,16 @@ const App = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
   const setDirection = async () => {
     const lang = await LocalStorage.get('lang');
-    const t = await LocalStorage.set('authToken', 'ffffff');
+    console.log('lllllang', lang);
+    // const t = await LocalStorage.set('authToken', null);
 
-    t;
-    if (lang == 'ar') {
+    // t;
+    if (lang === 'ar') {
+      I18nManager.allowRTL(true);
       I18nManager.forceRTL(true);
     } else {
+      I18nManager.allowRTL(false);
+
       I18nManager.forceRTL(false);
     }
   };

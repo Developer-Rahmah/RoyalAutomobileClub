@@ -42,7 +42,7 @@
   "The password and confirmation password do not match.": "كلمة المرور وتأكيد كلمة المرور غير متطابقة.",
   "More":"المزيد",
   "Home":"الرئيسية",
-  "Our Facilities":"منشأتنا",
+  "Our Facilities":"مرافقنا",
   "News and Events":"أخبار وأحداث",
   "Motor Sport":"رياضة السيارات",
   "The RACJ has the primary role of assisting motorists":"يلعب RACJ الدور الأساسي في مساعدة سائقي السيارات",
@@ -51,6 +51,21 @@
   "Save Kids Life Initiative":"مبادرة إنقاذ حياة الأطفال",
   "On the occasion of the International United Nation week on road safety":"بمناسبة أسبوع الأمم المتحدة الدولي للسلامة على الطرق",
   "Save kids Lives Declaration":"إعلان إنقاذ حياة الأطفال",
-  "This Declaration is a call for action to mark UN Global Road Safety":"هذا الإعلان هو دعوة للعمل بمناسبة الأمم المتحدة العالمية للسلامة على الطرق"
+  "This Declaration is a call for action to mark UN Global Road Safety":"هذا الإعلان هو دعوة للعمل بمناسبة الأمم المتحدة العالمية للسلامة على الطرق",
+  "About us":"عن النادي",
+  "Facilities":"المرافق",
+  "Services":"الخدمات",
+  "Wallet":"المحفظة",
+  "Reservation":"الحجوزات",
+  "News & Events":"الأخبار و الأحداث",
+  "Settings":"الإعدادات",
+  "Contact Us":"اتصل بنا",
+  "Logout":"تسجيل خروج",
+  "Notifications":"الاشعارات",
+  "Language":"اللغة",
+  "OFF":"ايقاف",
+  "ON":"تشغيل",
+  "EN":"الانجليزية",
+  "AR":"العربية"
 
 }

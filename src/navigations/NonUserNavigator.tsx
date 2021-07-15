@@ -24,11 +24,11 @@ const NonUserNavigator = () => {
     const lang = await LocalStorage.get('lang');
 
     dispatch(setLanguageAction(lang));
-    if (lang == 'ar') {
-      I18nManager.forceRTL(true);
-    } else {
-      I18nManager.forceRTL(false);
-    }
+    // if (lang == 'ar') {
+    //   I18nManager.forceRTL(true);
+    // } else {
+    //   I18nManager.forceRTL(false);
+    // }
   };
   useEffect(() => {
     getLang();

@@ -11,7 +11,7 @@ import {
   SectionHeader,
   MoreTxtContainer,
 } from 'RoyalAutomobileClub/src/screens/home/HomeScreenStyled';
-import {ScrollView, View, StyleSheet} from 'react-native';
+import {ScrollView, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
 import Carousel from 'react-native-snap-carousel';
 import {SCREEN_WIDTH} from 'RoyalAutomobileClub/src/services/helper/Constant';
@@ -23,9 +23,10 @@ import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import More from 'RoyalAutomobileClub/assets/icons/more.png';
 import {DataSlider} from './static/DataSlider';
 import GridCard from 'RoyalAutomobileClub/src/components/GridCard';
+import {useNavigation} from '@react-navigation/native';
 export default function HomeScreen() {
   const [sliderActiveSlide, setSliderActiveSlide] = useState(1);
-
+  const navigation = useNavigation();
   const _renderItem = ({item}) => {
     return <ImageCarousel source={{uri: item.image}} />;
   };
@@ -52,7 +53,7 @@ export default function HomeScreen() {
                 inactiveSlideScale={0.94}
                 inactiveSlideOpacity={0.7}
                 // inactiveSlideShift={20}
-                loop={true}
+                loop={false}
                 loopClonesPerSide={1}
                 autoplay={true}
                 autoplayDelay={500}
@@ -67,20 +68,29 @@ export default function HomeScreen() {
               </GrayIndicator>
             </CarouselContainer>
           </ImageAndTextContainer>
-          {Data.map((list) => {
+          {Data.map((list, index) => {
             return (
               <>
                 <SectionHeader>
                   <Title color={Colors.ORANGE} title={list.sectionHeader} />
-                  <MoreTxtContainer>
-                    <Title
-                      style={styles.marginEnd}
-                      small
-                      color={Colors.BLACK}
-                      title={'More'}
-                    />
-                    <IconImage source={More} verySmall />
-                  </MoreTxtContainer>
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate('ListingScreen', {
+                        type: index === 0 ? 'Facilities' : 'News',
+                        title: list.sectionHeader,
+                        listing: list.dataList,
+                      })
+                    }>
+                    <MoreTxtContainer>
+                      <Title
+                        style={styles.marginEnd}
+                        small
+                        color={Colors.BLACK}
+                        title={'More'}
+                      />
+                      <IconImage source={More} verySmall />
+                    </MoreTxtContainer>
+                  </TouchableOpacity>
                 </SectionHeader>
 
                 <Rows

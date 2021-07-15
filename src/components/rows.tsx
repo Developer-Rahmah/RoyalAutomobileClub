@@ -5,7 +5,7 @@ import EmptyListMessage from 'RoyalAutomobileClub/src/components/EmptyListMessag
 import {FlatList} from 'react-native-gesture-handler';
 import {SectionList} from 'react-native';
 import General from 'RoyalAutomobileClub/assets/styles/General';
-import { SCREEN_WIDTH } from '../services/helper/Constant';
+import {SCREEN_WIDTH} from '../services/helper/Constant';
 
 /**
  *
@@ -41,16 +41,20 @@ export default function Rows({
 
   return (
     <Listing
-      columnWrapperStyle={{
-        flex: 1,
-        justifyContent: "space-around"}}
-    style={{width:SCREEN_WIDTH}}
+      // columnWrapperStyle={{
+      //   flex: 1,
+      //   justifyContent: "space-around"}}
+      style={{width: SCREEN_WIDTH}}
       data={data}
       numColumns={numColumns}
       showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       ListEmptyComponent={EmptyListMessage}
       // contentContainerStyle={{justifyContent: 'space-around'}}
-      contentContainerStyle={{ paddingBottom: usePadding ? paddingAmount : 0, width: '100%', paddingHorizontal:7}}
+      contentContainerStyle={{
+        paddingBottom: usePadding ? paddingAmount : 0,
+        width: '100%',
+        paddingHorizontal: 7,
+      }}
       ListFooterComponent={({}) => <LoadingMore loading={loading} />}
       renderItem={(props) => (
         <Col style={[bottomSpace && General.paddingBottom, {flex: 1}]}>

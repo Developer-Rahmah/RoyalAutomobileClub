@@ -42,7 +42,7 @@ export const Data: IData[] = [
           'https://sigma.jo/Content/images/projects/gallery/636802780632835550RACJ15.jpg',
         title: 'Save Kids Life Initiative',
         description:
-          'TOn the occasion of the International United Nation week on road safety',
+          'On the occasion of the International United Nation week on road safety',
         date: '06 Jun 2015',
       },
 

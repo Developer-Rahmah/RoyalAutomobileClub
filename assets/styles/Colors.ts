@@ -21,4 +21,6 @@ export enum Colors {
   LIGHT_GRAY_3 = '#e6e9f4',
   LIGHT_GRAY_4 = '#707070',
   SUCCESS = '#22BB33',
+  GREEN_2 = '#01CB11',
+  LIGHT_GRAY_5 = '#DEDEDE',
 }
