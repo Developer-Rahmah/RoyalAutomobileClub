@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Plus from 'RoyalAutomobileClub/assets/icons/plus.png';
@@ -8,7 +9,16 @@ import Title from 'RoyalAutomobileClub/src/components/Title';
 import {IFacility} from '../screens/home/static/Data';
 import {Button, ColumnCardContainer, ColumnCardImage} from './ComponentStyled';
 
-const CoulmnCard = ({item}: {item: IFacility | any}) => {
+const CoulmnCard = ({
+  item,
+  index,
+  listing,
+}: {
+  item: IFacility | any;
+  index: number;
+  listing: IFacility[];
+}) => {
+  const navigation = useNavigation();
   const styles = StyleSheet.create({
     detailsContainer: {
       padding: 10,
@@ -47,7 +57,19 @@ const CoulmnCard = ({item}: {item: IFacility | any}) => {
           title={item.description}
           numberOfLines={3}
         />
-        <Button style={styles.buttonWidth}>
+        <Button
+          onPress={() =>
+            navigation.navigate('DetailsScreen', {
+              type: index === 0 ? 'Facilities' : 'News',
+              items: item,
+              title: item.title,
+              description: item.description,
+              image: item.image,
+              listing: listing,
+              date: item.date != undefined ? item.date : '',
+            })
+          }
+          style={styles.buttonWidth}>
           <Title
             style={{marginHorizontal: 7}}
             color={Colors.WHITE}

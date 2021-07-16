@@ -50,9 +50,9 @@ const Menu = () => {
               <Football height={27} width={27} />
             </MenuItem>
 
-            <MenuItem title="Wallet">
+            {/* <MenuItem title="Wallet">
               <Wallet height={27} width={27} />
-            </MenuItem>
+            </MenuItem> */}
 
             <MenuItem title="Reservation">
               <Calendar height={27} width={27} />

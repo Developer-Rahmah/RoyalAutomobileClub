@@ -22,7 +22,7 @@ export default function Rows({
   isSectionList,
   numColumns,
   data,
-
+  horizontal = false,
   ...rest
 }: {
   loading?: boolean;
@@ -36,11 +36,13 @@ export default function Rows({
   numColumns?: number;
   data?: any;
   rest?: any;
+  horizontal?: boolean;
 }) {
   const Listing = isSectionList ? SectionList : (FlatList as React.ElementType);
 
   return (
     <Listing
+      horizontal={horizontal}
       // columnWrapperStyle={{
       //   flex: 1,
       //   justifyContent: "space-around"}}

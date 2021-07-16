@@ -98,7 +98,14 @@ export default function HomeScreen() {
                   isSectionList={false}
                   data={list.dataList}
                   renderItem={({item}) => {
-                    return <GridCard item={item} />;
+                    return (
+                      <GridCard
+                        title={list.sectionHeader}
+                        item={item}
+                        index={index}
+                        listing={list.dataList}
+                      />
+                    );
                   }}
                 />
               </>

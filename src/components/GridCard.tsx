@@ -6,14 +6,29 @@ import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
 import Plus from 'RoyalAutomobileClub/assets/icons/plus.png';
 import {GridCardContainer, GridCardImage, Button} from './ComponentStyled';
 import {IFacility} from '../screens/home/static/Data';
+import {useNavigation} from '@react-navigation/native';
 
-const GridCard = ({item}: {item: IFacility | any}) => {
+const GridCard = ({
+  item,
+  index,
+  title,
+  listing,
+  disabled = false,
+}: {
+  item: IFacility | any;
+  index?: number;
+  title?: string;
+  listing?: IFacility[];
+  disabled: boolean;
+}) => {
+  const navigation = useNavigation();
   const styles = StyleSheet.create({
     padding: {padding: 10},
     marginVertical: {
       marginVertical: 10,
     },
   });
+
   return (
     <GridCardContainer>
       <GridCardImage source={{uri: item.image}} />
@@ -36,7 +51,20 @@ const GridCard = ({item}: {item: IFacility | any}) => {
           title={item.description}
           numberOfLines={2}
         />
-        <Button>
+        <Button
+          onPress={() =>
+            disabled
+              ? console.log('to do set item')
+              : navigation.navigate('DetailsScreen', {
+                  type: index === 0 ? 'Facilities' : 'News',
+                  items: item,
+                  title: item.title,
+                  description: item.description,
+                  image: item.image,
+                  listing: listing,
+                  date: item.date != undefined ? item.date : '',
+                })
+          }>
           <Title
             style={{marginHorizontal: 7}}
             color={Colors.WHITE}

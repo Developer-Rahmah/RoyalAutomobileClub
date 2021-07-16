@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import Header from 'RoyalAutomobileClub/src/components/Header';
 import Title from 'RoyalAutomobileClub/src/components/Title';
 import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
@@ -40,7 +40,8 @@ export default function LoginScreen() {
   } = useForm({
     mode: 'onChange',
   });
-  const onSubmit = (data: object) => {
+  const onSubmit = (data: any) => {
+    console.log(data);
     Toast.show({
       text: t('Welcome back'),
       textStyle: {
@@ -53,7 +54,6 @@ export default function LoginScreen() {
 
       duration: 2000,
       position: 'bottom',
-      onClose: (reason) => {},
     });
     dispatch(setAuthTokenAction('ffff'));
     LocalStorage.set('authToken', 'fffff');
