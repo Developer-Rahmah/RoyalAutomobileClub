@@ -1,6 +1,6 @@
 import {useRoute} from '@react-navigation/native';
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View, Share} from 'react-native';
 import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import GridCard from 'RoyalAutomobileClub/src/components/GridCard';
 import Header from 'RoyalAutomobileClub/src/components/Header';
@@ -12,7 +12,8 @@ import {
   PosterImage,
   ShareButton,
 } from 'RoyalAutomobileClub/src/screens/detailsScreen/DetailsScreenStyled';
-import Share from 'RoyalAutomobileClub/assets/icons/share.png';
+import ShareIcon from 'RoyalAutomobileClub/assets/icons/share.png';
+import {Data} from '../home/static/Data';
 export default function DetailsScreen() {
   const route = useRoute() as any;
   const imgUri = route?.params?.image;
@@ -21,7 +22,24 @@ export default function DetailsScreen() {
   const listing = route.params.listing;
   const date = route.params.date;
   const type = route.params.type;
-  console.log('listing', listing);
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: title,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <>
       <Header title={title} showBack />
@@ -75,7 +93,9 @@ export default function DetailsScreen() {
                 horizontal={true}
                 numColumns={1}
                 isSectionList={false}
-                data={listing}
+                data={
+                  type === 'Facilities' ? Data[0].dataList : Data[1].dataList
+                }
                 renderItem={({item}) => {
                   return (
                     <View style={styles.cardContainer}>
@@ -88,8 +108,8 @@ export default function DetailsScreen() {
           </ScrollView>
         </ScrollView>
         <View style={styles.shareSection}>
-          <ShareButton>
-            <IconImage source={Share} small style={{marginEnd: 10}} />
+          <ShareButton onPress={() => onShare()}>
+            <IconImage source={ShareIcon} small style={{marginEnd: 10}} />
             <Title title="Share" color={Colors.WHITE} />
           </ShareButton>
         </View>

@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Share, StyleSheet, View} from 'react-native';
 import Plus from 'RoyalAutomobileClub/assets/icons/plus.png';
 import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
@@ -13,10 +13,12 @@ const CoulmnCard = ({
   item,
   index,
   listing,
+  type,
 }: {
   item: IFacility | any;
   index: number;
   listing: IFacility[];
+  type: string;
 }) => {
   const navigation = useNavigation();
   const styles = StyleSheet.create({
@@ -60,7 +62,7 @@ const CoulmnCard = ({
         <Button
           onPress={() =>
             navigation.navigate('DetailsScreen', {
-              type: index === 0 ? 'Facilities' : 'News',
+              type: type,
               items: item,
               title: item.title,
               description: item.description,

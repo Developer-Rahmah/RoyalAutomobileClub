@@ -11,6 +11,7 @@ export default function ListingScreen() {
   const route = useRoute() as any;
   const dataListing = route?.params?.listing;
   const listingTitle = route?.params?.title;
+  const type = route?.params?.type;
 
   return (
     <>
@@ -23,7 +24,7 @@ export default function ListingScreen() {
             isSectionList={false}
             data={dataListing}
             renderItem={({item}) => {
-              return <CoulmnCard item={item} />;
+              return <CoulmnCard type={type} item={item} />;
             }}
           />
 

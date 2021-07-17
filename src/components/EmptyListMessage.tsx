@@ -13,13 +13,7 @@ const EmptyListMessage = ({}) => {
         Elements.noItemsMessageContainer,
         Layout.fullWidth,
       ]}>
-      <Title
-        color={Colors.GRAY}
-        numberOfLines={0}
-        title="You do not have any products.
-Press the green button below to
-add new ones"
-      />
+      <Title color={Colors.GRAY} numberOfLines={0} title="No Record Found" />
     </View>
   );
 };
