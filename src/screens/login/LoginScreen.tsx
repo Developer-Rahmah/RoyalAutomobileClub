@@ -50,7 +50,7 @@ export default function LoginScreen() {
         fontFamily: 'Poppins-Medium',
         textAlign: 'center',
       },
-      style: {backgroundColor: Colors.SUCCESS},
+      style: {backgroundColor: Colors.ORANGE},
 
       duration: 2000,
       position: 'bottom',

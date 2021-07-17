@@ -7,6 +7,7 @@ import Menu from 'RoyalAutomobileClub/src/components/Menu/Menu';
 import ListingScreen from '../screens/listing/ListingScreen';
 import SettingsScreen from '../screens/settings/SettingsScreen';
 import DetailsScreen from '../screens/detailsScreen/DetailsScreen';
+import AboutUsScreen from '../screens/aboutUs/AboutUsScreen';
 const Drawer = createDrawerNavigator();
 
 const UsersNavigator = () => {
@@ -25,6 +26,7 @@ const UsersNavigator = () => {
         <Stack.Screen name="ListingScreen" component={ListingScreen} />
         <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
         <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+        <Stack.Screen name="AboutUsScreen" component={AboutUsScreen} />
       </Drawer.Navigator>
     </>
   );
