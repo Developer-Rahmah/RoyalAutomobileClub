@@ -8,6 +8,8 @@ import ListingScreen from '../screens/listing/ListingScreen';
 import SettingsScreen from '../screens/settings/SettingsScreen';
 import DetailsScreen from '../screens/detailsScreen/DetailsScreen';
 import AboutUsScreen from '../screens/aboutUs/AboutUsScreen';
+import AboutAppScreen from '../screens/aboutApp/AboutAppScreen';
+import ContactUsScreen from '../screens/contactUs/ContactUsScreen';
 const Drawer = createDrawerNavigator();
 
 const UsersNavigator = () => {
@@ -27,6 +29,8 @@ const UsersNavigator = () => {
         <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
         <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
         <Stack.Screen name="AboutUsScreen" component={AboutUsScreen} />
+        {/* <Stack.Screen name="AboutAppScreen" component={AboutAppScreen} /> */}
+        <Stack.Screen name="ContactUsScreen" component={ContactUsScreen} />
       </Drawer.Navigator>
     </>
   );

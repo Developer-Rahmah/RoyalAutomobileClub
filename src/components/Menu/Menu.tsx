@@ -66,7 +66,7 @@ const Menu = () => {
               <Settings height={27} width={27} />
             </MenuItem>
 
-            <MenuItem title="Contact Us">
+            <MenuItem screenName="ContactUsScreen" title="Contact Us">
               <ContactUs height={27} width={27} />
             </MenuItem>
             <View style={{paddingTop: '17%'}}>
