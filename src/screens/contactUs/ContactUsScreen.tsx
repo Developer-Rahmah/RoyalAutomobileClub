@@ -16,7 +16,9 @@ import {
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
 import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import MapView from 'react-native-maps';
+// import MapView from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
+
 import {
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
@@ -69,7 +71,7 @@ export default function ContactUsScreen() {
   const onSubmit = (data: any) => {
     console.log(data);
     Linking.openURL(
-      `mailto:contact@archi-interior.com?subject=message from app&body=${data.message}`,
+      `mailto:info@racj.com?subject=message from app&body=${data.message}`,
     );
     Toast.show({
       text: t('your message sent successfully'),
@@ -87,7 +89,7 @@ export default function ContactUsScreen() {
   };
   return (
     <>
-      <Header title="About App" showMenu showBell />
+      <Header title="Contact Us" showMenu showBell />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={General.flex}>
@@ -96,8 +98,20 @@ export default function ContactUsScreen() {
             <ImageAndTextContainer>
               <CarouselContainer>
                 <MapView
-                  style={{width: SCREEN_WIDTH, height: SCREEN_HEIGHT / 3}}
-                />
+                  minZoomLevel={10}
+                  initialRegion={{
+                    latitude: 31.963012,
+                    longitude: 35.849816,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                  }}
+                  style={{width: SCREEN_WIDTH, height: SCREEN_HEIGHT / 3}}>
+                  <Marker
+                    coordinate={{latitude: 31.963012, longitude: 35.849816}}
+                    title={'Royal Automobile Club'}
+                    description="Royal Automobile Club"
+                  />
+                </MapView>
               </CarouselContainer>
             </ImageAndTextContainer>
             <View
@@ -126,7 +140,7 @@ export default function ContactUsScreen() {
               </ContactUsItem>
               <ContactUsItem
                 title="Call"
-                onPress={() => Linking.openURL(`tel:${'962795288209'}`)}>
+                onPress={() => Linking.openURL(`tel:${':+96265850626'}`)}>
                 <Call height={44} width={44} />
               </ContactUsItem>
               <ContactUsItem

@@ -13,7 +13,7 @@ export default function Button(props: {
   withBorder?: boolean;
   backgroundColor?: Colors;
   txtColor: Colors;
-  style?: StyleSheet;
+  style?: {};
 }) {
   const handlePress = async () => {
     if (!props.locked) {
@@ -31,6 +31,7 @@ export default function Button(props: {
         Elements.primaryButton,
         General.largeMarginVertical,
         {opacity: props.locked ? 0.3 : 1},
+        props.style,
       ]}>
       <Title title={props.title} color={props.txtColor} />
     </TouchableOpacity>

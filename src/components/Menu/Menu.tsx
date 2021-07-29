@@ -46,7 +46,7 @@ const Menu = () => {
               <Facilities height={27} width={27} />
             </MenuItem>
 
-            <MenuItem title="Services">
+            <MenuItem screenName="AllServicesScreen" title="Services">
               <Football height={27} width={27} />
             </MenuItem>
 

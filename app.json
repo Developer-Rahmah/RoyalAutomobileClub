@@ -24,7 +24,12 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.royaltest2021.RoyalAutomobileClub"
+      "package": "com.royaltest2021.RoyalAutomobileClub",
+      "config": {
+        "googleMaps":{
+          "apiKey":"AIzaSyCfChzYp1nntg3C8vUTsCxHOLOlnvIGnHc"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

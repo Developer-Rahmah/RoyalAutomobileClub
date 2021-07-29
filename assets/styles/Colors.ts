@@ -20,7 +20,9 @@ export enum Colors {
   LIGHT_GRAY_2 = '#CBCBCB',
   LIGHT_GRAY_3 = '#e6e9f4',
   LIGHT_GRAY_4 = '#707070',
+  LIGHT_GRAY_6 = '#F9F9F9',
   SUCCESS = '#22BB33',
   GREEN_2 = '#01CB11',
   LIGHT_GRAY_5 = '#DEDEDE',
+  LIGHT_GRAY_7 = '#9A9A9A',
 }
