@@ -3,25 +3,17 @@ import Header from 'RoyalAutomobileClub/src/components/Header';
 import Title from 'RoyalAutomobileClub/src/components/Title';
 import {
   ContainerView,
-  GrayIndicator,
   ImageAndTextContainer,
   CarouselContainer,
-  OrangeIndicator,
   ImageCarousel,
-  SectionHeader,
-  MoreTxtContainer,
 } from 'RoyalAutomobileClub/src/screens/aboutUs/AboutUsScreenStyled';
-import {ScrollView, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {ScrollView, View, StyleSheet} from 'react-native';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {SCREEN_WIDTH} from 'RoyalAutomobileClub/src/services/helper/Constant';
 import {useState} from 'react';
-import Rows from 'RoyalAutomobileClub/src/components/Rows';
-import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
 import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
-import More from 'RoyalAutomobileClub/assets/icons/more.png';
 import {Gallery} from './static/Gallery';
-import GridCard from 'RoyalAutomobileClub/src/components/GridCard';
 import {useNavigation} from '@react-navigation/native';
 export default function AboutUsScreen() {
   const [sliderActiveSlide, setSliderActiveSlide] = useState(1);

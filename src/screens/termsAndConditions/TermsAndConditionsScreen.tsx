@@ -4,23 +4,15 @@ import Title from 'RoyalAutomobileClub/src/components/Title';
 import {
   ContainerView,
   ImageAndTextContainer,
-  ImageCarousel,
 } from 'RoyalAutomobileClub/src/screens/aboutUs/AboutUsScreenStyled';
 import {ScrollView, View, StyleSheet} from 'react-native';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
-import {useState} from 'react';
 import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
-import {useNavigation} from '@react-navigation/native';
-import Logo from 'RoyalAutomobileClub/assets/images/logo.png';
+import Terms from 'RoyalAutomobileClub/assets/images/terms.png';
 import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
 import ImageStyles from 'RoyalAutomobileClub/assets/styles/ImageStyles';
 
-export default function AboutAppScreen() {
-  const [sliderActiveSlide, setSliderActiveSlide] = useState(1);
-  const navigation = useNavigation();
-  const _renderItem = ({item}) => {
-    return <ImageCarousel source={item.image} />;
-  };
+export default function TermsAndConditionsScreen() {
   const styles = StyleSheet.create({
     marginEnd: {
       marginEnd: 3,
@@ -38,13 +30,13 @@ export default function AboutAppScreen() {
   });
   return (
     <>
-      <Header title="About App" showBack showBell />
+      <Header title="Terms & Condition" showBack showBell />
 
       <ScrollView>
         <ContainerView>
           <ImageAndTextContainer>
             <IconImage
-              source={Logo}
+              source={Terms}
               style={[ImageStyles.teaserImage, {marginBottom: 30}]}
             />
           </ImageAndTextContainer>

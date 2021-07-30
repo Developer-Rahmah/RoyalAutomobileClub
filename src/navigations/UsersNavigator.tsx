@@ -13,6 +13,9 @@ import ServiceListingScreen from '../screens/serviceListing/ServiceListingScreen
 import ServiceDetailsScreen from '../screens/serviceDetails/ServiceDetailsScreen';
 import UpdateScreen from '../screens/updateProfile/UpdateScreen';
 import AboutAppScreen from '../screens/aboutApp/AboutAppScreen';
+import PrivacyPolicyScreen from '../screens/privacyPolicy/PrivacyPolicyScreen';
+import TermsAndConditionsScreen from '../screens/termsAndConditions/TermsAndConditionsScreen';
+import ChangePasswordScreen from '../screens/changePassword/ChangePasswordScreen';
 const Drawer = createDrawerNavigator();
 
 const UsersNavigator = () => {
@@ -36,6 +39,18 @@ const UsersNavigator = () => {
         <Stack.Screen name="ContactUsScreen" component={ContactUsScreen} />
         <Stack.Screen name="AllServicesScreen" component={AllServicesScreen} />
         <Stack.Screen name="UpdateScreen" component={UpdateScreen} />
+        <Stack.Screen
+          name="ChangePasswordScreen"
+          component={ChangePasswordScreen}
+        />
+        <Stack.Screen
+          name="PrivacyPolicyScreen"
+          component={PrivacyPolicyScreen}
+        />
+        <Stack.Screen
+          name="TermsAndConditionsScreen"
+          component={TermsAndConditionsScreen}
+        />
 
         <Stack.Screen
           name="ServiceDetailsScreen"

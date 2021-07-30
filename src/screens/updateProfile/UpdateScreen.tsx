@@ -202,6 +202,7 @@ export default function UpdateScreen() {
             </View>
             <View style={[Elements.btnContainer]}>
               <TouchableOpacity
+                onPress={() => navigation.navigate('ChangePasswordScreen')}
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',

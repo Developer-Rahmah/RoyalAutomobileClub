@@ -135,8 +135,18 @@ export default function SettingsScreen() {
             }}
             text="About App"
           />
-          <SettingSection text="Privacy Policy" />
-          <SettingSection text="Terms & Conditions" />
+          <SettingSection
+            text="Privacy Policy"
+            onPress={() => {
+              navigation.navigate('PrivacyPolicyScreen');
+            }}
+          />
+          <SettingSection
+            onPress={() => {
+              navigation.navigate('TermsAndConditionsScreen');
+            }}
+            text="Terms & Conditions"
+          />
         </ContainerView>
       </ScrollView>
     </>
