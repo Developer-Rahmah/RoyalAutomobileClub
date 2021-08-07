@@ -8,6 +8,7 @@ import {
   GridCardContainer,
   GridCardImage,
   Button,
+  GridCardContainerService,
 } from 'RoyalAutomobileClub/src/components/ComponentStyled';
 import {useNavigation} from '@react-navigation/native';
 import {IServices} from '../static/Services';
@@ -34,8 +35,11 @@ const ServiceCard = ({
   });
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('ServiceListingScreen')}>
-      <GridCardContainer
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('ServiceListingScreen', {id: item.id})
+      }>
+      <GridCardContainerService
         style={{
           backgroundColor: Colors.LIGHT_GRAY_6,
           paddingVertical: 10,
@@ -46,9 +50,9 @@ const ServiceCard = ({
           style={{resizeMode: 'contain', width: '50%', height: 100}}
         />
         <View style={styles.padding}>
-          <Title title={item.title} />
+          <Title title={item.name} />
         </View>
-      </GridCardContainer>
+      </GridCardContainerService>
     </TouchableOpacity>
   );
 };

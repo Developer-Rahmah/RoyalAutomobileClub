@@ -1,10 +1,20 @@
 import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import styled from 'styled-components/native';
+import { SCREEN_HEIGHT } from '../services/helper/Constant';
 
 export interface IGridCard {
   imgSource: string;
 }
 export const GridCardContainer = styled.View`
+  background-color: ${Colors.WHITE};
+  margin: 7px;
+  justify-content: center;
+  align-items: center;
+  height: ${SCREEN_HEIGHT / 3.1};
+  border-radius: 15px;
+`;
+
+export const GridCardContainerService = styled.View`
   background-color: ${Colors.WHITE};
   margin: 7px;
   justify-content: center;

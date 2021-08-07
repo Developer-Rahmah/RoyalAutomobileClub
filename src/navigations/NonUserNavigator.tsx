@@ -11,6 +11,9 @@ import ViewPagerJoinUs from '../screens/viewPager/ViewPagerJoinUs';
 import LoginScreen from '../screens/login/LoginScreen';
 import RegisterScreen from '../screens/register/RegisterScreen';
 import CongratsScreen from '../screens/register/CongratsScreen';
+import ForgotPasswordEmail from '../screens/forgotPassowrd/ForgotPasswordEmail';
+import ForgotPasswordCode from '../screens/forgotPassowrd/ForgotPasswordCode';
+import ForgotPasswordReset from '../screens/forgotPassowrd/ForgotPasswordReset';
 
 const NonUserNavigator = () => {
   interface RootState {
@@ -50,6 +53,19 @@ const NonUserNavigator = () => {
             <Stack.Screen name="ViewPagerOffer" component={ViewPagerOffer} />
             <Stack.Screen name="ViewPagerJoinUs" component={ViewPagerJoinUs} />
             <Stack.Screen name="LoginScreen" component={LoginScreen} />
+            <Stack.Screen
+              name="ForgotPasswordEmail"
+              component={ForgotPasswordEmail}
+            />
+            <Stack.Screen
+              name="ForgotPasswordCode"
+              component={ForgotPasswordCode}
+            />
+            <Stack.Screen
+              name="ForgotPasswordReset"
+              component={ForgotPasswordReset}
+            />
+
             <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
             <Stack.Screen name="CongratsScreen" component={CongratsScreen} />
           </>

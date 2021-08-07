@@ -7,6 +7,7 @@ import Plus from 'RoyalAutomobileClub/assets/icons/plus.png';
 import {GridCardContainer, GridCardImage, Button} from './ComponentStyled';
 import {IFacility} from '../screens/home/static/Data';
 import {useNavigation} from '@react-navigation/native';
+import {SCREEN_WIDTH} from '../services/helper/Constant';
 
 const GridCard = ({
   item,
@@ -52,6 +53,7 @@ const GridCard = ({
           numberOfLines={2}
         />
         <Button
+          style={{width: SCREEN_WIDTH / 2.9}}
           onPress={() =>
             disabled
               ? console.log('to do set item')

@@ -1,6 +1,6 @@
 import {NavigationContext, useNavigation} from '@react-navigation/native';
-import React from 'react';
-import {ImageBackground, StyleSheet, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {AsyncStorage, ImageBackground, StyleSheet, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import Layout from 'RoyalAutomobileClub/assets/styles/Layout';
 import IconImage from '../IconImage';
@@ -19,10 +19,30 @@ import News from 'RoyalAutomobileClub/assets/svg/News.svg';
 import Settings from 'RoyalAutomobileClub/assets/svg/Settings.svg';
 import ContactUs from 'RoyalAutomobileClub/assets/svg/ContactUs.svg';
 import Logout from 'RoyalAutomobileClub/assets/svg/Logout.svg';
+import Img from 'RoyalAutomobileClub/assets/images/img.png';
 
 import MenuItem from './MenuItem';
 
 const Menu = () => {
+  const [image, setImage] = useState(null);
+  const [user, setUser] = useState({});
+  const [userId, setUserId] = useState();
+  const getUserInfo = async () => {
+    try {
+      const value = await AsyncStorage.getItem('user');
+      const id = await AsyncStorage.getItem('userId');
+      setUserId(id);
+      if (value !== null) {
+        // We have data!!
+        setUser(JSON.parse(value));
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+  useEffect(() => {
+    getUserInfo();
+  }, []);
   const navigation = useNavigation();
   return (
     <ImageBackground
@@ -31,8 +51,19 @@ const Menu = () => {
       <ScrollView>
         <NavigationContext.Provider value={navigation}>
           <View style={styles.container}>
-            <IconImage source={John} style={ImageStyles.teaserImage} />
-            <Title title="John Smith" color={Colors.ORANGE} />
+            {user.image ? (
+              <IconImage
+                source={{uri: user.image}}
+                style={[ImageStyles.teaserImage, {borderRadius: 100}]}
+              />
+            ) : (
+              <IconImage source={Img} style={[ImageStyles.teaserImage]} />
+            )}
+            {/* <IconImage source={John} style={ImageStyles.teaserImage} /> */}
+            <Title
+              title={user.first_name + ' ' + user.last_name}
+              color={Colors.ORANGE}
+            />
           </View>
           <View>
             <MenuItem screenName="HomeScreen" title="Home">

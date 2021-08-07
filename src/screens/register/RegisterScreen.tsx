@@ -19,6 +19,7 @@ import {
   View,
   TouchableOpacity,
   Image,
+  AsyncStorage,
 } from 'react-native';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
 import {useForm, Controller} from 'react-hook-form';
@@ -30,10 +31,14 @@ import {useTranslation} from 'RoyalAutomobileClub/src/services/hooks';
 import Layout from 'RoyalAutomobileClub/assets/styles/Layout';
 import {useNavigation} from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
+import {Client} from 'RoyalAutomobileClub/src/services/config/clients';
+import {POST} from 'RoyalAutomobileClub/src/services/config/api';
+import LocalStorage from 'RoyalAutomobileClub/src/services/helper/LocalStorage';
 
 export default function RegisterScreen() {
+  let formData;
   const [image, setImage] = useState(null);
-
+  const [disableBtn, setDisableBtn] = useState(false);
   const navigation = useNavigation();
   const t = useTranslation();
   const {
@@ -43,7 +48,21 @@ export default function RegisterScreen() {
   } = useForm({
     mode: 'onChange',
   });
-  const onSubmit = (data: any) => {
+  const saveData = (data) => {
+    AsyncStorage.setItem('user', JSON.stringify(data), (err) => {
+      if (err) {
+        console.log('an error');
+        throw err;
+      }
+      console.log('success', data);
+      navigation.navigate('CongratsScreen');
+    }).catch((err) => {
+      console.log('error is: ' + err);
+    });
+  };
+  const onSubmit = async (data: any) => {
+    setDisableBtn(true);
+
     if (data.password != data.confirmPassword) {
       Toast.show({
         text: t('The password and confirmation password do not match.'),
@@ -60,21 +79,130 @@ export default function RegisterScreen() {
         onClose: (reason) => {},
       });
     } else {
-      Toast.show({
-        text: t('Registered Successfully'),
-        textStyle: {
-          color: Colors.WHITE,
-          fontSize: 20,
-          fontFamily: 'Poppins-Medium',
-          textAlign: 'center',
-        },
-        style: {backgroundColor: Colors.ORANGE},
+      const uri = 'https://nattech.online/racj/api_docs/signup';
 
-        duration: 2000,
-        position: 'bottom',
-        onClose: (reason) => {},
+      formData = new FormData();
+      formData.append('first_name', data.firstName);
+      formData.append('last_name', data.lastName);
+      formData.append('email', data.email);
+      formData.append('membership_no', data.membershipNo);
+      formData.append('password', data.password);
+      formData.append('token', 'token');
+
+      if (image != null) {
+        // const imgUrl = image.uri;
+        formData.append('image', {
+          uri: image,
+          type: 'image/jpeg',
+          name: 'img.jpg',
+        });
+      }
+      console.log('formData', formData);
+      const options = {
+        method: 'post',
+        body: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data; ',
+        },
+      };
+      Client.post(`${POST.SIGNUP}`, formData).then((res) => {
+        console.log('resssresss', res);
+        if (res.status == 200) {
+          if (res.data.status == 'error') {
+            Toast.show({
+              text: res.data.message,
+              textStyle: {
+                color: Colors.WHITE,
+                fontSize: 20,
+                fontFamily: 'Poppins-Medium',
+                textAlign: 'center',
+              },
+              type: 'danger',
+              duration: 2000,
+            });
+          } else {
+            saveData(res.data);
+            Toast.show({
+              text: t('Registered Successfully'),
+              textStyle: {
+                color: Colors.WHITE,
+                fontSize: 20,
+                fontFamily: 'Poppins-Medium',
+                textAlign: 'center',
+              },
+              style: {backgroundColor: Colors.ORANGE},
+
+              duration: 2000,
+            });
+          }
+          setDisableBtn(false);
+          console.log('datttta', res.data);
+          // Toast.show({
+          //   text: t('Registered Successfully'),
+          //   textStyle: {
+          //     color: Colors.WHITE,
+          //     fontSize: 20,
+          //     fontFamily: 'Poppins-Medium',
+          //     textAlign: 'center',
+          //   },
+          //   style: {backgroundColor: Colors.ORANGE},
+
+          //   duration: 2000,
+          // });
+        } else {
+          setDisableBtn(false);
+        }
       });
-      navigation.navigate('CongratsScreen');
+      // await fetch(uri, options).then((res) => {
+      //   console.log('resss', res);
+
+      //   res.json().then(function (response) {
+      //     console.log('response', response);
+      //     if (response.status == 'error') {
+      //       setDisableBtn(false);
+      //       Toast.show({
+      //         text: response.message,
+      //         textStyle: {
+      //           color: Colors.WHITE,
+      //           fontSize: 20,
+      //           fontFamily: 'Poppins-Medium',
+      //           textAlign: 'center',
+      //         },
+      //         type: 'danger',
+      //         duration: 2000,
+      //       });
+      //     } else if (response.status == 400) {
+      //       setDisableBtn(false);
+      //       Toast.show({
+      //         text: response.message,
+      //         textStyle: {
+      //           color: Colors.WHITE,
+      //           fontSize: 20,
+      //           fontFamily: 'Poppins-Medium',
+      //           textAlign: 'center',
+      //         },
+      //         type: 'danger',
+      //         duration: 2000,
+      //       });
+      //     } else {
+      //       Toast.show({
+      //         text: response.message,
+      //         textStyle: {
+      //           color: Colors.WHITE,
+      //           fontSize: 20,
+      //           fontFamily: 'Poppins-Medium',
+      //           textAlign: 'center',
+      //         },
+      //         style: {backgroundColor: Colors.ORANGE},
+
+      //         duration: 2000,
+      //       });
+      //       setDisableBtn(false);
+      //       navigation.navigate('CongratsScreen');
+      //     }
+      //   });
+      // });
+      // // navigation.navigate('CongratsScreen');
     }
   };
   const pickImage = async () => {
@@ -235,7 +363,7 @@ export default function RegisterScreen() {
             </View>
             <View style={Elements.btnContainer}>
               <Button
-                locked={!isValid}
+                locked={!isValid || disableBtn == true}
                 onClick={handleSubmit(onSubmit)}
                 title="Register"
                 txtColor={Colors.WHITE}

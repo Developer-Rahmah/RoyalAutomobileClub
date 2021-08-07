@@ -1,12 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import Header from 'RoyalAutomobileClub/src/components/Header';
 import Title from 'RoyalAutomobileClub/src/components/Title';
 import IconImage from 'RoyalAutomobileClub/src/components/IconImage';
-import ChangePassword from 'RoyalAutomobileClub/assets/images/change-password.png';
+import LoginImg from 'RoyalAutomobileClub/assets/images/login.png';
 import Lock from 'RoyalAutomobileClub/assets/icons/lock.png';
-import User from 'RoyalAutomobileClub/assets/icons/user.png';
 import Email from 'RoyalAutomobileClub/assets/icons/email.png';
-import Contacts from 'RoyalAutomobileClub/assets/icons/contacts.png';
 import ImageStyles from 'RoyalAutomobileClub/assets/styles/ImageStyles';
 import {Colors} from 'RoyalAutomobileClub/assets/styles/Colors';
 import {ContainerView, ImageAndTextContainer, ImageContainer} from './styled';
@@ -18,7 +16,6 @@ import {
   ScrollView,
   View,
   TouchableOpacity,
-  Image,
   AsyncStorage,
 } from 'react-native';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
@@ -28,21 +25,20 @@ import {Toast} from 'native-base';
 import ErrorMsg from 'RoyalAutomobileClub/src/components/ErrorMsg';
 import {validateEmail} from 'RoyalAutomobileClub/src/services/helper/validation';
 import {useTranslation} from 'RoyalAutomobileClub/src/services/hooks';
-import Layout from 'RoyalAutomobileClub/assets/styles/Layout';
-import {useNavigation} from '@react-navigation/native';
-import * as ImagePicker from 'expo-image-picker';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {setAuthTokenAction} from 'RoyalAutomobileClub/src/services/redux/actions';
+import LocalStorage from 'RoyalAutomobileClub/src/services/helper/LocalStorage';
 import {Client} from 'RoyalAutomobileClub/src/services/config/clients';
 import {POST} from 'RoyalAutomobileClub/src/services/config/api';
 
-export default function ChangePasswordScreen() {
-  const [image, setImage] = useState(null);
-  const [user, setUser] = useState({});
-  const [userId, setUserId] = useState();
-
-  const [disableBtn, setDisableBtn] = useState(false);
+export default function ForgotPasswordReset() {
   let formData;
+  const [disableBtn, setDisableBtn] = useState(false);
+  const route = useRoute() as any;
   const navigation = useNavigation();
   const t = useTranslation();
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
@@ -50,23 +46,41 @@ export default function ChangePasswordScreen() {
   } = useForm({
     mode: 'onChange',
   });
-  const getUserInfo = async () => {
-    try {
-      const value = await AsyncStorage.getItem('user');
-      const id = await AsyncStorage.getItem('userId');
-      setUserId(id);
-      if (value !== null) {
-        // We have data!!
-        setUser(JSON.parse(value));
+  // const onSubmit = (data: any) => {
+  //   console.log(data);
+  //   Toast.show({
+  //     text: t('Welcome back'),
+  //     textStyle: {
+  //       color: Colors.WHITE,
+  //       fontSize: 20,
+  //       fontFamily: 'Poppins-Medium',
+  //       textAlign: 'center',
+  //     },
+  //     style: {backgroundColor: Colors.ORANGE},
+
+  //     duration: 2000,
+  //     position: 'bottom',
+  //   });
+  //   dispatch(setAuthTokenAction('ffff'));
+  //   LocalStorage.set('authToken', 'fffff');
+  // };
+  const saveData = (data) => {
+    AsyncStorage.setItem('userId', data.id);
+
+    AsyncStorage.setItem('user', JSON.stringify(data), (err) => {
+      if (err) {
+        console.log('an error');
+        throw err;
       }
-    } catch (error) {
-      // Error retrieving data
-    }
+      console.log('success', data);
+
+      // navigation.navigate('CongratsScreen');
+      // dispatch(setAuthTokenAction('ffff'));
+      // LocalStorage.set('authToken', 'fffff');
+    }).catch((err) => {
+      console.log('error is: ' + err);
+    });
   };
-  useEffect(() => {
-    getUserInfo();
-  }, []);
-  console.log('usssssser', user);
   const onSubmit = async (data: any) => {
     if (data.password != data.confirmPassword) {
       Toast.show({
@@ -87,11 +101,10 @@ export default function ChangePasswordScreen() {
       setDisableBtn(true);
 
       formData = new FormData();
-      formData.append('userid', userId);
-      formData.append('currentpassword', data.currentPassword);
-      formData.append('newpassword', data.confirmPassword);
+      formData.append('email', route.params.email);
+      formData.append('password', data.confirmPassword);
 
-      Client.post(`${POST.RESET_PASSWORD}`, formData).then((res) => {
+      Client.post(`${POST.CHANGE_PASSWORD}`, formData).then((res) => {
         console.log('resssresss', res);
         if (res.status == 200) {
           if (res.data.status == 400) {
@@ -107,7 +120,7 @@ export default function ChangePasswordScreen() {
               duration: 2000,
             });
           } else {
-            navigation.goBack();
+            navigation.navigate('LoginScreen');
             // saveData(res.data);
             Toast.show({
               text: res.data.message,
@@ -192,110 +205,61 @@ export default function ChangePasswordScreen() {
       // // navigation.navigate('CongratsScreen');
     }
   };
-
-  const pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    console.log(result);
-
-    if (!result.cancelled) {
-      setImage(result.uri);
-    }
-  };
-  useEffect(() => {
-    (async () => {
-      if (Platform.OS !== 'web') {
-        const {status} =
-          await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
-        }
-      }
-    })();
-  }, [image]);
   return (
     <>
-      <Header title="Change Password" showBack />
+      <Header title="Login" showBack />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={[General.flex, {backgroundColor: Colors.WHITE}]}>
+        style={General.flex}>
         <ScrollView>
-          <View style={[Layout.flexCenter, {paddingTop: 20}]}>
-            <ContainerView style={General.whiteBackgroundColor}>
-              <ImageAndTextContainer>
-                <ImageContainer style={General.smallPadding}>
-                  <IconImage
-                    source={ChangePassword}
-                    style={[ImageStyles.teaserImage]}
+          <ContainerView>
+            <ImageAndTextContainer>
+              <ImageContainer style={{flex: 0}}>
+                <IconImage source={LoginImg} style={ImageStyles.mediumImage} />
+              </ImageContainer>
+            </ImageAndTextContainer>
+            <View style={Elements.loginFieldsContainer}>
+              <Controller
+                control={control}
+                render={({field: {onChange, value, onBlur}}) => (
+                  <Input
+                    isPassword
+                    leftIcon={Lock}
+                    placeholder={t('Password')}
+                    onChangeText={(value: string) => onChange(value)}
+                    value={value}
                   />
-                </ImageContainer>
-              </ImageAndTextContainer>
-              <View style={Elements.loginFieldsContainer}>
-                <Controller
-                  control={control}
-                  render={({field: {onChange, value, onBlur}}) => (
-                    <Input
-                      isPassword
-                      leftIcon={Lock}
-                      placeholder={t('Current Password')}
-                      onChangeText={(value: string) => onChange(value)}
-                      value={value}
-                    />
-                  )}
-                  name="currentPassword"
-                  rules={{required: true}}
-                />
-                {errors.currentPassword && (
-                  <ErrorMsg errorMsg="This is required." />
                 )}
+                name="password"
+                rules={{required: true}}
+              />
+              {errors.password && <ErrorMsg errorMsg="This is required." />}
 
-                <Controller
-                  control={control}
-                  render={({field: {onChange, value, onBlur}}) => (
-                    <Input
-                      isPassword
-                      leftIcon={Lock}
-                      placeholder={t('New Password')}
-                      onChangeText={(value: string) => onChange(value)}
-                      value={value}
-                    />
-                  )}
-                  name="password"
-                  rules={{required: true}}
-                />
-                {errors.password && <ErrorMsg errorMsg="This is required." />}
-                <Controller
-                  control={control}
-                  render={({field: {onChange, value, onBlur}}) => (
-                    <Input
-                      isPassword
-                      leftIcon={Lock}
-                      placeholder={t('Confirm New Password')}
-                      onChangeText={(value: string) => onChange(value)}
-                      value={value}
-                    />
-                  )}
-                  name="confirmPassword"
-                  rules={{required: true}}
-                />
-                {errors.confirmPassword && (
-                  <ErrorMsg errorMsg="This is required." />
+              <Controller
+                control={control}
+                render={({field: {onChange, value, onBlur}}) => (
+                  <Input
+                    isPassword
+                    leftIcon={Lock}
+                    placeholder={t('Confirm Password')}
+                    onChangeText={(value: string) => onChange(value)}
+                    value={value}
+                  />
                 )}
-              </View>
-              <View style={Elements.btnContainer} />
+                name="confirmPassword"
+                rules={{required: true}}
+              />
+              {errors.password && <ErrorMsg errorMsg="This is required." />}
+            </View>
+            <View style={Elements.btnContainer}>
               <Button
                 locked={!isValid || disableBtn == true}
                 onClick={handleSubmit(onSubmit)}
-                title="Confirm"
+                title="Reset"
                 txtColor={Colors.WHITE}
               />
-            </ContainerView>
-          </View>
+            </View>
+          </ContainerView>
         </ScrollView>
       </KeyboardAvoidingView>
     </>

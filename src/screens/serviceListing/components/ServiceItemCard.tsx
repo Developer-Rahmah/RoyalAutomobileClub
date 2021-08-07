@@ -56,7 +56,7 @@ const ServiceItemCard = ({
           }}
         />
         <View style={styles.detailsContainer}>
-          <Title title={item.title} />
+          <Title title={item.name} />
           {item.date != undefined ? (
             <Title
               color={Colors.ORANGE}
@@ -70,7 +70,7 @@ const ServiceItemCard = ({
             color={Colors.SEMI_BLACK}
             small
             fontFamily="Poppins-Regular"
-            title={item.size}
+            title={item.description}
             numberOfLines={3}
           />
         </View>

@@ -14,13 +14,27 @@ import {
 import General from 'RoyalAutomobileClub/assets/styles/General';
 import Button from 'RoyalAutomobileClub/src/components/Button';
 import {useNavigation} from '@react-navigation/native';
-import {StyleSheet, View} from 'react-native';
+import {AsyncStorage, StyleSheet, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {setAuthTokenAction} from 'RoyalAutomobileClub/src/services/redux/actions';
+import {useEffect} from 'react';
 
 export default function CongratsScreen() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const getUserInfo = async () => {
+    try {
+      const value = await AsyncStorage.getItem('user');
+      if (value !== null) {
+        // We have data!!
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+  useEffect(() => {
+    getUserInfo();
+  }, []);
   return (
     <>
       <Header title="Confirmation" showBack />
@@ -51,7 +65,7 @@ export default function CongratsScreen() {
         </ImageAndTextContainer>
 
         <Button
-          onClick={() => dispatch(setAuthTokenAction('ffff'))}
+          onClick={() => navigation.navigate('LoginScreen')}
           txtColor={Colors.WHITE}
           title="Continue to Home"
         />

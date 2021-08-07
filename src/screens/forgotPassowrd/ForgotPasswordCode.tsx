@@ -25,16 +25,17 @@ import {Toast} from 'native-base';
 import ErrorMsg from 'RoyalAutomobileClub/src/components/ErrorMsg';
 import {validateEmail} from 'RoyalAutomobileClub/src/services/helper/validation';
 import {useTranslation} from 'RoyalAutomobileClub/src/services/hooks';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {setAuthTokenAction} from 'RoyalAutomobileClub/src/services/redux/actions';
 import LocalStorage from 'RoyalAutomobileClub/src/services/helper/LocalStorage';
 import {Client} from 'RoyalAutomobileClub/src/services/config/clients';
 import {POST} from 'RoyalAutomobileClub/src/services/config/api';
 
-export default function LoginScreen() {
+export default function ForgotPasswordCode() {
   let formData;
   const [disableBtn, setDisableBtn] = useState(false);
+  const route = useRoute() as any;
 
   const navigation = useNavigation();
   const t = useTranslation();
@@ -73,9 +74,10 @@ export default function LoginScreen() {
         throw err;
       }
       console.log('success', data);
+
       // navigation.navigate('CongratsScreen');
-      dispatch(setAuthTokenAction('ffff'));
-      LocalStorage.set('authToken', 'fffff');
+      // dispatch(setAuthTokenAction('ffff'));
+      // LocalStorage.set('authToken', 'fffff');
     }).catch((err) => {
       console.log('error is: ' + err);
     });
@@ -85,12 +87,10 @@ export default function LoginScreen() {
     setDisableBtn(true);
 
     formData = new FormData();
-    formData.append('email', data.email);
-    formData.append('password', data.password);
-    formData.append('token', 'token');
-    console.log('formData', formData);
+    formData.append('email', route.params.email);
+    formData.append('code', data.code);
 
-    Client.post(`${POST.LOGIN}`, formData).then((res) => {
+    Client.post(`${POST.VERIFY}`, formData).then((res) => {
       console.log('resssresss', res);
       if (res.status == 200) {
         if (res.data.status == 400) {
@@ -106,9 +106,12 @@ export default function LoginScreen() {
             duration: 2000,
           });
         } else {
-          saveData(res.data);
+          // saveData(res.data);
+          navigation.navigate('ForgotPasswordReset', {
+            email: route.params.email,
+          });
           Toast.show({
-            text: t('Registered Successfully'),
+            text: res.data.message,
             textStyle: {
               color: Colors.WHITE,
               fontSize: 20,
@@ -204,30 +207,23 @@ export default function LoginScreen() {
               </ImageContainer>
             </ImageAndTextContainer>
             <View style={Elements.loginFieldsContainer}>
-              <Title title="Welcome back ," color={Colors.ORANGE} />
-
               <Controller
                 control={control}
                 render={({field: {onChange, value, onBlur}}) => (
                   <Input
-                    keyboardType="email-address"
-                    placeholder={t('Email')}
-                    leftIcon={Email}
+                    placeholder={t('Verfication Code')}
                     onChangeText={(value: string) => onChange(value)}
                     value={value}
                   />
                 )}
-                name="email"
+                name="code"
                 rules={{
                   required: true,
-                  pattern: {
-                    value: validateEmail,
-                  },
                 }}
               />
               {errors.email && <ErrorMsg errorMsg="Invalid Email Address." />}
 
-              <Controller
+              {/* <Controller
                 control={control}
                 render={({field: {onChange, value, onBlur}}) => (
                   <Input
@@ -241,29 +237,15 @@ export default function LoginScreen() {
                 name="password"
                 rules={{required: true}}
               />
-              {errors.password && <ErrorMsg errorMsg="This is required." />}
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('ForgotPasswordEmail');
-                }}>
-                <Title
-                  title="Forget Password?"
-                  style={General.smallTopMargin}
-                  color={Colors.ORANGE}
-                />
-              </TouchableOpacity>
+              {errors.password && <ErrorMsg errorMsg="This is required." />} */}
             </View>
             <View style={Elements.btnContainer}>
               <Button
                 locked={!isValid || disableBtn == true}
                 onClick={handleSubmit(onSubmit)}
-                title="Login"
+                title="Verify"
                 txtColor={Colors.WHITE}
               />
-              <TouchableOpacity
-                onPress={() => navigation.navigate('RegisterScreen')}>
-                <Title title="Create an account" color={Colors.ORANGE} />
-              </TouchableOpacity>
             </View>
           </ContainerView>
         </ScrollView>

@@ -19,6 +19,7 @@ import {
   View,
   TouchableOpacity,
   Image,
+  AsyncStorage,
 } from 'react-native';
 import Elements from 'RoyalAutomobileClub/assets/styles/Elements';
 import {useForm, Controller} from 'react-hook-form';
@@ -30,10 +31,16 @@ import {useTranslation} from 'RoyalAutomobileClub/src/services/hooks';
 import Layout from 'RoyalAutomobileClub/assets/styles/Layout';
 import {useNavigation} from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
+import {Client} from 'RoyalAutomobileClub/src/services/config/clients';
+import {POST} from 'RoyalAutomobileClub/src/services/config/api';
 
 export default function UpdateScreen() {
   const [image, setImage] = useState(null);
+  const [user, setUser] = useState({});
+  const [disableBtn, setDisableBtn] = useState(false);
+  const [userId, setUserId] = useState();
 
+  let formData;
   const navigation = useNavigation();
   const t = useTranslation();
   const {
@@ -43,7 +50,19 @@ export default function UpdateScreen() {
   } = useForm({
     mode: 'onChange',
   });
-  const onSubmit = (data: any) => {
+  const saveData = (data) => {
+    AsyncStorage.setItem('user', JSON.stringify(data), (err) => {
+      if (err) {
+        console.log('an error');
+        throw err;
+      }
+      console.log('success', data);
+      navigation.navigate('CongratsScreen');
+    }).catch((err) => {
+      console.log('error is: ' + err);
+    });
+  };
+  const onSubmit = async (data: any) => {
     if (data.password != data.confirmPassword) {
       Toast.show({
         text: t('The password and confirmation password do not match.'),
@@ -60,23 +79,125 @@ export default function UpdateScreen() {
         onClose: (reason) => {},
       });
     } else {
-      Toast.show({
-        text: t('Registered Successfully'),
-        textStyle: {
-          color: Colors.WHITE,
-          fontSize: 20,
-          fontFamily: 'Poppins-Medium',
-          textAlign: 'center',
-        },
-        style: {backgroundColor: Colors.ORANGE},
+      setDisableBtn(true);
 
-        duration: 2000,
-        position: 'bottom',
-        onClose: (reason) => {},
+      formData = new FormData();
+      formData.append('userid', userId);
+      formData.append('first_name', data.firstName);
+      formData.append('last_name', data.lastName);
+      formData.append('membership_no', data.membershipNo);
+
+      if (image != null) {
+        // const imgUrl = image.uri;
+        formData.append('image', {
+          uri: image,
+          type: 'image/jpeg',
+          name: 'img.jpg',
+        });
+      }
+      Client.post(`${POST.UPDATE_PROFILE}`, formData).then((res) => {
+        console.log('resssresss', res);
+        if (res.status == 200) {
+          if (res.data.status == 400) {
+            Toast.show({
+              text: res.data.message,
+              textStyle: {
+                color: Colors.WHITE,
+                fontSize: 20,
+                fontFamily: 'Poppins-Medium',
+                textAlign: 'center',
+              },
+              type: 'danger',
+              duration: 2000,
+            });
+          } else {
+            saveData(res.data);
+            navigation.goBack();
+            Toast.show({
+              text: 'success',
+              textStyle: {
+                color: Colors.WHITE,
+                fontSize: 20,
+                fontFamily: 'Poppins-Medium',
+                textAlign: 'center',
+              },
+              style: {backgroundColor: Colors.ORANGE},
+
+              duration: 2000,
+            });
+          }
+
+          setDisableBtn(false);
+          console.log('datttta', res.data);
+          // Toast.show({
+          //   text: t('Registered Successfully'),
+          //   textStyle: {
+          //     color: Colors.WHITE,
+          //     fontSize: 20,
+          //     fontFamily: 'Poppins-Medium',
+          //     textAlign: 'center',
+          //   },
+          //   style: {backgroundColor: Colors.ORANGE},
+
+          //   duration: 2000,
+          // });
+        } else {
+          setDisableBtn(false);
+        }
       });
-      navigation.navigate('CongratsScreen');
+      // await fetch(uri, options).then((res) => {
+      //   console.log('resss', res);
+
+      //   res.json().then(function (response) {
+      //     console.log('response', response);
+      //     if (response.status == 'error') {
+      //       setDisableBtn(false);
+      //       Toast.show({
+      //         text: response.message,
+      //         textStyle: {
+      //           color: Colors.WHITE,
+      //           fontSize: 20,
+      //           fontFamily: 'Poppins-Medium',
+      //           textAlign: 'center',
+      //         },
+      //         type: 'danger',
+      //         duration: 2000,
+      //       });
+      //     } else if (response.status == 400) {
+      //       setDisableBtn(false);
+      //       Toast.show({
+      //         text: response.message,
+      //         textStyle: {
+      //           color: Colors.WHITE,
+      //           fontSize: 20,
+      //           fontFamily: 'Poppins-Medium',
+      //           textAlign: 'center',
+      //         },
+      //         type: 'danger',
+      //         duration: 2000,
+      //       });
+      //     } else {
+      //       Toast.show({
+      //         text: response.message,
+      //         textStyle: {
+      //           color: Colors.WHITE,
+      //           fontSize: 20,
+      //           fontFamily: 'Poppins-Medium',
+      //           textAlign: 'center',
+      //         },
+      //         style: {backgroundColor: Colors.ORANGE},
+
+      //         duration: 2000,
+      //       });
+      //       setDisableBtn(false);
+      //       navigation.navigate('CongratsScreen');
+      //     }
+      //   });
+      // });
+      // // navigation.navigate('CongratsScreen');
     }
   };
+
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -91,6 +212,22 @@ export default function UpdateScreen() {
       setImage(result.uri);
     }
   };
+  const getUserInfo = async () => {
+    try {
+      const value = await AsyncStorage.getItem('user');
+      const id = await AsyncStorage.getItem('userId');
+      setUserId(id);
+      if (value !== null) {
+        // We have data!!
+        setUser(JSON.parse(value));
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+  useEffect(() => {
+    getUserInfo();
+  }, []);
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {
@@ -113,11 +250,15 @@ export default function UpdateScreen() {
             <ImageAndTextContainer>
               <ImageContainer style={General.smallPadding}>
                 <TouchableOpacity onPress={pickImage}>
-                  {/* <IconImage source={AddImg} style={[ImageStyles.teaserImage,]} /> */}
                   {image != null ? (
                     <Image
                       source={{uri: image}}
                       style={[ImageStyles.teaserImage, ImageStyles.userProfile]}
+                    />
+                  ) : user.image ? (
+                    <IconImage
+                      source={{uri: user.image}}
+                      style={[ImageStyles.teaserImage, {borderRadius: 100}]}
                     />
                   ) : (
                     <IconImage
@@ -133,72 +274,40 @@ export default function UpdateScreen() {
                 control={control}
                 render={({field: {onChange, value, onBlur}}) => (
                   <Input
-                    placeholder={t('John')}
+                    placeholder={user.first_name}
                     leftIcon={User}
                     onChangeText={(value: string) => onChange(value)}
                     value={value}
                   />
                 )}
                 name="firstName"
-                rules={{
-                  required: true,
-                }}
               />
-              {errors.firstName && <ErrorMsg errorMsg="This is required." />}
 
               <Controller
                 control={control}
                 render={({field: {onChange, value, onBlur}}) => (
                   <Input
-                    placeholder={t('Smith')}
+                    placeholder={user.last_name}
                     leftIcon={User}
                     onChangeText={(value: string) => onChange(value)}
                     value={value}
                   />
                 )}
                 name="lastName"
-                rules={{
-                  required: true,
-                }}
               />
-              {errors.lastName && <ErrorMsg errorMsg="This is required." />}
               <Controller
                 control={control}
                 render={({field: {onChange, value, onBlur}}) => (
                   <Input
                     keyboardType="number-pad"
-                    placeholder={t('342354')}
+                    placeholder={user.membership_no}
                     leftIcon={Contacts}
                     onChangeText={(value: string) => onChange(value)}
                     value={value}
                   />
                 )}
                 name="membershipNo"
-                rules={{
-                  required: true,
-                }}
               />
-              {errors.membershipNo && <ErrorMsg errorMsg="This is required." />}
-              <Controller
-                control={control}
-                render={({field: {onChange, value, onBlur}}) => (
-                  <Input
-                    keyboardType="email-address"
-                    placeholder={t('John_smith91@gmail.cpm')}
-                    leftIcon={Email}
-                    onChangeText={(value: string) => onChange(value)}
-                    value={value}
-                  />
-                )}
-                name="email"
-                rules={{
-                  required: true,
-                  pattern: {
-                    value: validateEmail,
-                  },
-                }}
-              />
-              {errors.email && <ErrorMsg errorMsg="Invalid Email Address." />}
             </View>
             <View style={[Elements.btnContainer]}>
               <TouchableOpacity
@@ -216,8 +325,8 @@ export default function UpdateScreen() {
                 />
               </TouchableOpacity>
               <Button
-                // locked={!isValid}
-                // onClick={handleSubmit(onSubmit)}
+                locked={disableBtn == true}
+                onClick={handleSubmit(onSubmit)}
                 title="Save"
                 txtColor={Colors.WHITE}
               />
